@@ -26,6 +26,10 @@ spring:
     ansi:
       enabled: always
 
+  #thymeleaf 서버 재시작 없이 바로 확인 할수 있도록
+  thymeleaf:
+    cache: false
+
 
 #로그레벨
 logging:
@@ -33,6 +37,7 @@ logging:
     org:
       hibernate : info
   file: application.log
+
 
 
 
