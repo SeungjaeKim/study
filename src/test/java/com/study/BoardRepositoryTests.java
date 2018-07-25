@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 /**
  * Created by seungjae 2018-07-25
  */
@@ -44,9 +46,14 @@ public class BoardRepositoryTests {
     @Test
     public void testByTitle() {
 
+        //before Java 8
+        /*List<Board> list = boardRepo.findBoardByTitle("제목..177");
+
+        for(int i=0, len = list.size(); i < len; i++) {
+            System.out.println(list.get(i));
+        }*/
+        // Java 8
         boardRepo.findBoardByTitle("제목..177").forEach(board -> System.out.println(board));
-
-
     }
 
 
