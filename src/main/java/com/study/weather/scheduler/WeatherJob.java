@@ -14,7 +14,7 @@ public class WeatherJob {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     
     /**
-     * 스케줄러 동작 여부
+     * 스케줄러 동작 여부 - true:동작, false:동작안함
      */
     @Value("${scheduler.weather.isStart}")
     private Boolean isStart;
