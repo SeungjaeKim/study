@@ -39,6 +39,9 @@ logging:
   file: application.log
 
 
-
-
-
+#스케줄러
+scheduler:
+   #날씨 스케줄러
+   weather:
+      #동작 여부
+      isStart: false
