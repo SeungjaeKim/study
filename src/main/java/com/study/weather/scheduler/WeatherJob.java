@@ -21,6 +21,7 @@ public class WeatherJob {
     
     @PostConstruct
     public void init() {
+        //시작 로그 출력
         logger.info("Start WeatherJob");
     }
 
