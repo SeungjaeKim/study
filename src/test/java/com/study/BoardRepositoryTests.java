@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -40,7 +41,6 @@ public class BoardRepositoryTests {
             board.setWriter("user0" + (i % 10));
             boardRepo.save(board);
         }
-
     }
 
     @Test
@@ -55,6 +55,48 @@ public class BoardRepositoryTests {
         // Java 8
         boardRepo.findBoardByTitle("제목..177").forEach(board -> System.out.println(board));
     }
+
+    @Test
+    public void testByWriter(){
+
+        Collection<Board> results = boardRepo.findByWriter("user00");
+
+        results.forEach(
+                board -> System.out.println(board)
+        );
+    }
+
+    @Test
+    public void testByWriterContaining(){
+
+        Collection<Board> results = boardRepo.findByWriterContaining("05");
+
+        results.forEach(
+                board -> System.out.println(board)
+        );
+    }
+
+    @Test
+    public void testByTitleAndBno(){
+
+        Collection<Board> results = boardRepo.findByTitleContainingAndBnoGreaterThan("5", 50L);
+
+        results.forEach(board -> System.out.println("board = " + board));
+    }
+
+    @Test
+    public void testBnoOrderBy(){
+
+        Collection<Board> results = boardRepo.findByBnoGreaterThanOrderByBnoDesc(90L);
+
+        results.forEach(board -> System.out.println(board));
+    }
+
+    @Test
+    public void testByTitle2(){
+        boardRepo.findByTitle("17").forEach(board -> System.out.println("board = " + board));
+    }
+
 
 
 }
