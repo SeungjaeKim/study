@@ -1,0 +1,11 @@
+깃 소스 내려 받기
+
+	Window > Show view > Other... > Git > Git Repositories 선택
+
+	Git Repositories 창 > Clone Git Repository 선택
+
+	깃 정보 입력 후 확인 시 로컬 브랜치가 만들어짐
+
+	Project Explorer > 우클릭 > import > import... > Git > Projects from Git 선택 > Existing local repository 선택
+
+	
