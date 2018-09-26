@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.study.domain.Board;
+import com.study.news.domain.NewsRss;
+import com.study.news.service.TestService;
+
 /**
  * 뉴스 관련
  */
@@ -39,6 +43,8 @@ public class NewsController {
         map.put("111", "222");
 
         logger.info(testService.getNow());
+        
+        NewsRss nr = new NewsRss();
         
         return map;
     }
