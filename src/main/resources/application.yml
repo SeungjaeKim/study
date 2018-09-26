@@ -21,7 +21,7 @@ spring:
     database: mysql
     #MySQL 상세 지정
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-  # 출력되는 로그에 색상 출력
+  #출력되는 로그에 색상 출력
   output:
     ansi:
       enabled: always
@@ -33,8 +33,8 @@ spring:
 
 #mybatis
 mybatis:
-  #config-location: classpath:mybatis-config.xml
-  mapper-locations: mapper/**/*.xml
+  config-location: classpath:mybatis-config.xml
+  #mapper-locations: mapper/**/*.xml
 
 
 #로그레벨

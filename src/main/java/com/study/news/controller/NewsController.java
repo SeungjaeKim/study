@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.study.domain.Board;
 import com.study.news.domain.NewsRss;
-import com.study.news.service.TestService;
+import com.study.news.service.NewsRssService;
 
 /**
  * 뉴스 관련
@@ -23,11 +22,8 @@ public class NewsController {
 	
 	private static Logger logger = LogManager.getLogger(NewsController.class);
 
-//    @Autowired
-//    private TestRepository testRepository;
-    
     @Autowired
-    private TestService testService;
+    private NewsRssService newsRssService;
 	
     @GetMapping("/admin/news/main")
     public String main(Model model) {
@@ -42,7 +38,7 @@ public class NewsController {
         HashMap<String, Object> map = new HashMap<>();
         map.put("111", "222");
 
-        logger.info(testService.getNow());
+        logger.info("getNewsRssList size :" + newsRssService.getNewsRssList().size());
         
         NewsRss nr = new NewsRss();
         

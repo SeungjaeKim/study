@@ -3,8 +3,6 @@ package com.study.news.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 public class NewsRss {
 
 	/**
@@ -22,4 +20,28 @@ public class NewsRss {
      */
     private String useYn;
 
+	public Long getRssSeq() {
+		return rssSeq;
+	}
+
+	public void setRssSeq(Long rssSeq) {
+		this.rssSeq = rssSeq;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getUseYn() {
+		return useYn;
+	}
+
+	public void setUseYn(String useYn) {
+		this.useYn = useYn;
+	}
+    
 }
