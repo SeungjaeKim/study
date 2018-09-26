@@ -2,6 +2,11 @@
 /bin/
 !.mvn/wrapper/maven-wrapper.jar
 
+/*.log
+/application.log*
+
+/src/main/document/db/study.mwb.bak
+
 ### STS ###
 .apt_generated
 .classpath
