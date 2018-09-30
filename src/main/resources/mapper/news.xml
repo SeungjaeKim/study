@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="News">
+
+    <insert id="insertNews" parameterType="com.study.news.domain.News">
+        /* insertNews - 뉴스등록 */
+    
+		INSERT INTO tbl_news ( comp_cd
+		                     , cl_cd
+		                     , news_title
+		                     , news_content
+		                     , news_url
+		                     )
+		VALUES ( #{compCd}
+		       , #{clCd}
+		       , #{newsTitle}
+		       , #{newsContent}
+		       , #{newsUrl}
+		       );
+    </insert>
+
+</mapper>

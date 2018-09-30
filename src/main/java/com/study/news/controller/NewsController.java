@@ -14,14 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.study.news.domain.NewsRss;
 import com.study.news.service.NewsRssService;
 
+import lombok.extern.log4j.Log4j2;
+
 /**
  * 뉴스 관련
  */
+@Log4j2
 @Controller
 public class NewsController {
 	
-	private static Logger logger = LogManager.getLogger(NewsController.class);
-
     @Autowired
     private NewsRssService newsRssService;
 	
@@ -38,11 +39,11 @@ public class NewsController {
         HashMap<String, Object> map = new HashMap<>();
         map.put("111", "222");
 
-        logger.info("getNewsRssList size :" + newsRssService.getNewsRssList().size());
+        log.info("getNewsRssList  :" + newsRssService.getNewsRssList().size());
         
         NewsRss nr = new NewsRss();
         
         return map;
-    }
+    } 
 
 }

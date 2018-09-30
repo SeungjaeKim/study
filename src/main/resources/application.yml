@@ -51,3 +51,8 @@ scheduler:
    weather:
       #스케줄러 수행 여부 - true:동작, false:동작안함
       isStart: false
+      
+   #뉴스 스케줄러
+   news: 
+      #스케줄러 수행 여부 - true:동작, false:동작안함
+      isStart: false
