@@ -1,26 +1,22 @@
 package com.study.news.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.study.news.domain.NewsRssVo;
-
 @Repository
-public class NewsRssDao {
+public class NewsDao {
 	
     @Autowired
 	private SqlSession sqlSession;
 	  
 	/**
-	 * 뉴스 RSS URL 목록
+	 * 뉴스 등록
 	 * @return
 	 */
-	public List<NewsRssVo> getNewsRssList() {
+	public void getNewsList() {
 		
-		return this.sqlSession.selectList("NewsRss.selectNewsRssList");
+		this.sqlSession.insert("News.insertNews");
 	}
 	
 }

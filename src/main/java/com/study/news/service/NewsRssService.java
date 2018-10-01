@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.study.news.dao.NewsRssDao;
-import com.study.news.domain.NewsRss;
+import com.study.news.domain.NewsRssVo;
 
 @Service
 public class NewsRssService {
@@ -18,7 +18,7 @@ public class NewsRssService {
 	 * 뉴스 RSS URL 목록 조회
 	 * @return
 	 */
-	public List<NewsRss> getNewsRssList() {
+	public List<NewsRssVo> getNewsRssList() {
 		
 		return newsRssDao.getNewsRssList();
 	}

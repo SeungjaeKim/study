@@ -21,7 +21,7 @@ public class NewsScheduler {
     @PostConstruct
     public void init() {
         //시작 로그 출력
-        log.info("Start WeatherJob");
+        log.info("Start NewsJob");
     }
 
     /**
@@ -35,7 +35,7 @@ public class NewsScheduler {
             return;
         }
 
-        log.info("WeatherJob...");
+        log.info("NewsJob...");
     }
     
 }

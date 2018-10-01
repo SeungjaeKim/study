@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.study.news.domain.NewsRss;
+import com.study.news.domain.NewsRssVo;
 import com.study.news.service.NewsRssService;
 
 import lombok.extern.log4j.Log4j2;
@@ -41,7 +41,7 @@ public class NewsController {
 
         log.info("getNewsRssList  :" + newsRssService.getNewsRssList().size());
         
-        NewsRss nr = new NewsRss();
+        NewsRssVo nr = new NewsRssVo();
         
         return map;
     } 
