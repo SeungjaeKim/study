@@ -34,6 +34,12 @@ public class NewsScheduler {
         if(!isStart) {
             return;
         }
+        
+        //1. xml 원본을 저장
+        
+        //2. xml 에서 개별뉴스 저장
+        
+        //3. 검색 색인 처리
 
         log.info("NewsJob...");
     }
