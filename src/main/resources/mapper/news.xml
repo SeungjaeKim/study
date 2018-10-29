@@ -3,7 +3,7 @@
 
 <mapper namespace="News">
 
-    <insert id="insertNews" parameterType="com.study.news.domain.News">
+    <insert id="insertNews" parameterType="com.study.news.domain.NewsVo">
         /* insertNews - 뉴스등록 */
     
 		INSERT INTO tbl_news ( comp_cd
