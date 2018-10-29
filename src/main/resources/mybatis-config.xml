@@ -8,6 +8,8 @@
     </settings>
 
     <mappers>
+        <mapper resource="mapper/comm_code.xml" />
+        <mapper resource="mapper/news.xml" />
         <mapper resource="mapper/news_rss.xml" />
     </mappers>
 </configuration>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommCode">
+
+    <select id="selectCommCodeList" parameterType="com.study.news.domain.CommCodeVo" resultType="com.study.news.domain.CommCodeVo">
+        /* selectCommCode - 공통코드 조회 */
+    
+        SELECT CODE_GROUP_ID
+             , CODE_ID
+             , CODE_NM
+             , CODE_DC
+             , USE_YN
+             , DEL_YN
+             , REG_DT
+             , REG_USER_ID
+             , UPD_DT
+             , UPD_USER_ID
+          FROM TBL_COMM_CODE
+         WHERE CODE_GROUP_ID = ${codeGroupId}
+    </select>
+
+</mapper>

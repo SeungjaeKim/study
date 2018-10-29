@@ -21,16 +21,20 @@
 
 <div class="site-wrapper">
 	<form id="frm">
-	<fieldset>
-		<legend>등록</legend>
-		<p>
-			<label for="input">RSS URL</label>
-			<input type="text" id="url" name="url" placeholder="RSS URL">
-		</p>
-		<p>
-			<input type="button" value="저장" onclick="save()">
-		</p>
-	</fieldset>
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label">RSS URL</label>
+		<div class="col-sm-10">
+		    <input type="email" class="form-control" id="url" name="url" placeholder="RSS URL">
+        </div>
+	</div>
+	<div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-10">
+	        <input type="button" value="저장" onclick="save()" class="btn btn-default">
+	    </div>
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="button" value="테스트" onclick="getCode()" class="btn btn-default">
+        </div>
+	</div>
 	</form>
 </div>
 
@@ -46,6 +50,20 @@ function save() {
           type : "POST"
         , url : "/admin/news/main/save"
         , data : $("#frm").serialize()
+        , error : function(){
+            alert("error");
+          }
+        , success : function(data){
+            alert("success");
+          }
+    });
+}
+
+function getCode() {
+    $.ajax({
+          type : "POST"
+        , url : "/comm/getCommCodeList"
+        , data : { "codeGroupId" : "G1" }
         , error : function(){
             alert("error");
           }

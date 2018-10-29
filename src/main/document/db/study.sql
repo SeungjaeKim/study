@@ -36,21 +36,24 @@ ENGINE = InnoDB
 
 -- 뉴스 RSS
 CREATE TABLE IF NOT EXISTS `study`.`tbl_news_rss` (
-  `rss_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '일련번호',
+  `rss_seq` BIGINT(20) NOT NULL COMMENT '일련번호',
+  `comp_cd` VARCHAR(45) NULL COMMENT '언론사 코드 - G1',
+  `cl_cd` VARCHAR(45) NULL COMMENT '뉴스 분야 코드 - G2',
   `rss_url` VARCHAR(300) NOT NULL COMMENT 'RSS URL',
   `use_yn` VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT '사용여부 YN',
-  `reg_dt` DATE NOT NULL DEFAULT now(),
-  `reg_user_id` VARCHAR(45) NULL,
-  `upd_dt` DATE NOT NULL DEFAULT now(),
-  `upd_user_id` VARCHAR(45) NULL,
-  PRIMARY KEY (`rss_id`),
+  `last_build_date` VARCHAR(100) NULL COMMENT '마지막 작성 일시',
+  `reg_dt` DATE NOT NULL DEFAULT now() COMMENT '등록일시',
+  `reg_user_id` VARCHAR(45) NULL COMMENT '등록 사용자 아이디',
+  `upd_dt` DATE NOT NULL DEFAULT now() COMMENT '수정일시',
+  `upd_user_id` VARCHAR(45) NULL COMMENT '수정 사용자 아이디',
+  PRIMARY KEY (`rss_seq`),
   UNIQUE INDEX `url_UNIQUE` (`rss_url` ASC))
 ENGINE = InnoDB
 ;
 
 -- 뉴스
 CREATE TABLE IF NOT EXISTS `study`.`tbl_news` (
-  `news_id` INT NOT NULL AUTO_INCREMENT COMMENT '뉴스 고유번호',
+  `news_seq` INT NOT NULL AUTO_INCREMENT COMMENT '뉴스 고유번호',
   `comp_cd` VARCHAR(45) NULL COMMENT '언론사 코드 - G1',
   `cl_cd` VARCHAR(45) NULL COMMENT '뉴스 분야 코드 - G2',
   `news_title` VARCHAR(200) NULL COMMENT '뉴스 제목',
@@ -58,6 +61,6 @@ CREATE TABLE IF NOT EXISTS `study`.`tbl_news` (
   `news_url` VARCHAR(45) NULL COMMENT '뉴스 URL',
   `reg_dt` DATE NOT NULL DEFAULT now() COMMENT '등록일시',
   `upd_dt` DATE NOT NULL DEFAULT now() COMMENT '수정일시',
-  PRIMARY KEY (`news_id`))
+  PRIMARY KEY (`news_seq`))
 ENGINE = InnoDB
 ;

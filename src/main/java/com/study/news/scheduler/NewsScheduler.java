@@ -21,14 +21,14 @@ public class NewsScheduler {
     @PostConstruct
     public void init() {
         //시작 로그 출력
-        log.info("Start NewsJob");
+        log.info("Start News Job");
     }
 
     /**
      * 1초에 한번씩 수행
      * @throws InterruptedException
      */
-    @Scheduled(fixedDelayString = "1000")
+    @Scheduled(fixedDelayString = "5000")
     public void job() throws InterruptedException {
 
         if(!isStart) {

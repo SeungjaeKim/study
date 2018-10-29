@@ -4,8 +4,8 @@
 <mapper namespace="NewsRss">
 
     <!-- 뉴스 RSS 목록 조회 -->
-    <select id="selectNewsRssList" resultType="com.study.news.domain.NewsRss">
-		select rss_seq
+    <select id="selectNewsRssList" resultType="com.study.news.domain.NewsRssVo">
+		select rss_id
              , url
              , use_yn
 		  from tbl_news_rss a
@@ -14,7 +14,7 @@
 			        from tbl_news_rss 
 			      /* limit #start#, #pageCount# */
 			      limit 0, 100) b
-		using(rss_seq)
+		using(rss_id)
     </select>
 
 </mapper>
