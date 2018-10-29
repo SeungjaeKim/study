@@ -17,7 +17,7 @@
              , UPD_DT
              , UPD_USER_ID
           FROM TBL_COMM_CODE
-         WHERE CODE_GROUP_ID = ${codeGroupId}
+         WHERE CODE_GROUP_ID = #{codeGroupId}
     </select>
 
 </mapper>
