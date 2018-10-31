@@ -24,47 +24,36 @@
 <div class="site-wrapper">
 	<form id="frm" class="form-horizontal">
     <div class="form-group">
-        <label for="compCd" class="control-label col-sm-2">언론사</label>
+        <label for="compCd" class="control-label col-sm-2">언론사 *</label>
         <div class="col-sm-10">
-            <div class="input-group">
-	            <span class="input-group-addon">*</span>
-				<select class="form-control" id="compCd" name="compCd">
-				    <option value="">선택</option>
-	                <option th:each="o : ${newsCompCdList}" th:value="${o.codeId}" th:text="${o.codeNm}"></option>
-				</select>
-			</div>
+			<select class="form-control" id="compCd" name="compCd">
+			    <option value="">선택</option>
+                <option th:each="vo : ${newsCompCdList}" th:value="${vo.codeId}" th:text="${vo.codeNm}"></option>
+			</select>
         </div>
     </div>
     <div class="form-group">
-        <label for="clCd" class="col-sm-2 control-label">분야</label>
+        <label for="clCd" class="col-sm-2 control-label">분야 *</label>
         <div class="col-sm-10">
-            <div class="input-group">
-	            <span class="input-group-addon">*</span>
-	            <select class="form-control" id="clCd" name="clCd">
-	                <option value="">선택</option>
-	                <option th:each="o : ${newsClCdList}" th:value="${o.codeId}" th:text="${o.codeNm}"></option>
-	            </select>
-	        </div>
+            <select class="form-control" id="clCd" name="clCd">
+                <option value="">선택</option>
+                <option th:each="vo : ${newsClCdList}" th:value="${vo.codeId}" th:text="${vo.codeNm}"></option>
+            </select>
         </div>
     </div>
 	<div class="form-group">
-		<label for="rssUrl" class="col-sm-2 control-label">RSS URL</label>
+		<label for="rssUrl" class="col-sm-2 control-label">RSS URL *</label>
 		<div class="col-sm-10">
-		    <div class="input-group">
-		        <span class="input-group-addon">*</span>
-		        <input type="text" class="form-control" id="rssUrl" name="rssUrl" placeholder="RSS URL">
-		    </div>
+	        <input type="text" class="form-control" id="rssUrl" name="rssUrl" placeholder="RSS URL" maxlength="300">
         </div>
 	</div>
 	<div class="form-group">
-		<label for="useYn" class="col-sm-2 control-label">사용여부</label>
+		<label for="useYn" class="col-sm-2 control-label">사용여부 *</label>
 		<div class="col-sm-10">
-		    <div class="input-group">
-				<div class="radio">
-				    <label><input type="radio" name="useYn" id="useYnY" value="Y" checked="checked">사용</label>
-				    <label><input type="radio" name="useYn" id="useYnN" value="N">사용</label>
-				</div>
-		    </div>
+			<div class="radio">
+			    <label><input type="radio" name="useYn" id="useYnY" value="Y" checked="checked">사용</label>
+			    <label><input type="radio" name="useYn" id="useYnN" value="N">미사용</label>
+			</div>
         </div>
 	</div>
 	<div class="form-group">

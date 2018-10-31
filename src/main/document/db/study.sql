@@ -1,3 +1,7 @@
+/* ****************************************************
+ * 테이블
+ * ***************************************************/
+
 -- 공통코드그룹
 CREATE TABLE IF NOT EXISTS `study`.`tbl_comm_code_group` (
   `code_group_id` VARCHAR(45) NOT NULL COMMENT '코드 그룹 아이디',
@@ -64,3 +68,48 @@ CREATE TABLE IF NOT EXISTS `study`.`tbl_news` (
   PRIMARY KEY (`news_seq`))
 ENGINE = InnoDB
 ;
+
+/* ****************************************************
+ * 공통코드
+ * ***************************************************/
+
+-- 뉴스 언론사
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G1', 'G1C1', '한겨레', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+-- 뉴스 분야
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C1', '정치', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C2', '경제', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C3', '사회', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C4', '국제', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C5', '대중문화', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C6', '스포츠', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C7', '과학', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C8', '사설/칼럼', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C9', '만화만평', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C10', '한겨레섹션', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C11', '주요기사', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', 'G2C12', '인기기사', null, 'Y', 'N', NOW(), null, NOW(), null);
