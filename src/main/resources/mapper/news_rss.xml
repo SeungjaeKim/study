@@ -3,9 +3,34 @@
 
 <mapper namespace="NewsRss">
 
+    <insert id="insertNewsRss" parameterType="com.study.news.domain.NewsRssVo">
+        /* insertNewsRss - 뉴스 RSS 등록 */
+    
+        INSERT INTO tbl_news_rss ( comp_cd
+                                 , cl_cd
+                                 , rss_url
+                                 , use_yn
+                                 , reg_dt
+                                 , reg_user_id
+                                 , upd_dt
+                                 , upd_user_id
+                                 )
+        VALUES ( #{compCd}     /* 언론사 코드 - G1 */  
+               , #{clCd}       /* 뉴스 분야 코드 - G2 */
+               , #{rssUrl}     /* RSS URL */
+               , #{useYn}      /* 사용여부 YN */
+               , NOW()         /* 등록일시 */
+               , #{regUserId}  /* 등록 사용자 아이디 */
+               , NOW()         /* 수정일시 */
+               , #{updUserId}  /* 수정 사용자 아이디 */
+               );
+    </insert>
+    
     <!-- 뉴스 RSS 목록 조회 -->
     <select id="selectNewsRssList" resultType="com.study.news.domain.NewsRssVo">
-		select rss_id
+        /* selectNewsRssList - 뉴스 RSS 목록 조회 */
+        
+		select rss_seq
              , url
              , use_yn
 		  from tbl_news_rss a

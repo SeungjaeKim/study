@@ -14,7 +14,16 @@ public class NewsRssDao {
     @Autowired
 	private SqlSession sqlSession;
 	  
-	/**
+    /**
+     * 뉴스 RSS URL 등록
+     * @return
+     */
+    public int insertNewsRssList(NewsRssVo newsRssVo) {
+    	
+    	return this.sqlSession.insert("NewsRss.insertNewsRss", newsRssVo);
+    }
+
+    /**
 	 * 뉴스 RSS URL 목록
 	 * @return
 	 */

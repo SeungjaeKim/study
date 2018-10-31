@@ -18,13 +18,53 @@
     <link href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet">
 </head>
 <body>
-
+<div class="page-header">
+  <h1>뉴스 RSS 등록</h1>
+</div>
 <div class="site-wrapper">
-	<form id="frm">
+	<form id="frm" class="form-horizontal">
+    <div class="form-group">
+        <label for="compCd" class="control-label col-sm-2">언론사</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+	            <span class="input-group-addon">*</span>
+				<select class="form-control" id="compCd" name="compCd">
+				    <option value="">선택</option>
+	                <option th:each="o : ${newsCompCdList}" th:value="${o.codeId}" th:text="${o.codeNm}"></option>
+				</select>
+			</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="clCd" class="col-sm-2 control-label">분야</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+	            <span class="input-group-addon">*</span>
+	            <select class="form-control" id="clCd" name="clCd">
+	                <option value="">선택</option>
+	                <option th:each="o : ${newsClCdList}" th:value="${o.codeId}" th:text="${o.codeNm}"></option>
+	            </select>
+	        </div>
+        </div>
+    </div>
 	<div class="form-group">
-		<label for="inputEmail3" class="col-sm-2 control-label">RSS URL</label>
+		<label for="rssUrl" class="col-sm-2 control-label">RSS URL</label>
 		<div class="col-sm-10">
-		    <input type="email" class="form-control" id="url" name="url" placeholder="RSS URL">
+		    <div class="input-group">
+		        <span class="input-group-addon">*</span>
+		        <input type="text" class="form-control" id="rssUrl" name="rssUrl" placeholder="RSS URL">
+		    </div>
+        </div>
+	</div>
+	<div class="form-group">
+		<label for="useYn" class="col-sm-2 control-label">사용여부</label>
+		<div class="col-sm-10">
+		    <div class="input-group">
+				<div class="radio">
+				    <label><input type="radio" name="useYn" id="useYnY" value="Y" checked="checked">사용</label>
+				    <label><input type="radio" name="useYn" id="useYnN" value="N">사용</label>
+				</div>
+		    </div>
         </div>
 	</div>
 	<div class="form-group">
@@ -46,6 +86,31 @@
  * 저장
  */
 function save() {
+	
+	var compCd = $("#compCd");  //뉴스 언론사 코드
+	
+	if (compCd.val()=="") {
+		alert("언론사를 선택해주세요.");
+		compCd.focus();
+		return;
+	}
+	
+	var clCd = $("#clCd");
+	
+    if (clCd.val()=="") {
+        alert("분야를 선택해주세요.");
+        clCd.focus();
+        return;
+    }
+    
+    var rssUrl = $("#rssUrl");
+    
+    if (rssUrl.val()=="") {
+        alert("URL을 입력해주세요.");
+        rssUrl.focus();
+        return;
+    } 
+	
 	$.ajax({
           type : "POST"
         , url : "/admin/news/main/save"

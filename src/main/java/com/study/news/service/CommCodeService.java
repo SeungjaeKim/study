@@ -16,6 +16,17 @@ public class CommCodeService {
 	
 	@Autowired
 	private CommCodeDao CommCodeDao;
+
+	/**
+	 * 공통코드 목록 조회
+	 * @return
+	 */
+	public List<CommCodeVo> selectCommCodeList(String codeGroupId) {
+		
+		CommCodeVo commCodeVo = new CommCodeVo();
+		commCodeVo.setCodeGroupId(codeGroupId);
+		return selectCommCodeList(commCodeVo);
+	}
 	
 	/**
 	 * 공통코드 목록 조회

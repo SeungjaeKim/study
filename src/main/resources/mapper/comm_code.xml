@@ -6,18 +6,18 @@
     <select id="selectCommCodeList" parameterType="com.study.news.domain.CommCodeVo" resultType="com.study.news.domain.CommCodeVo">
         /* selectCommCode - 공통코드 조회 */
     
-        SELECT CODE_GROUP_ID
-             , CODE_ID
-             , CODE_NM
-             , CODE_DC
-             , USE_YN
-             , DEL_YN
-             , REG_DT
-             , REG_USER_ID
-             , UPD_DT
-             , UPD_USER_ID
-          FROM TBL_COMM_CODE
-         WHERE CODE_GROUP_ID = #{codeGroupId}
+        SELECT code_group_id
+             , code_id
+             , code_nm
+             , code_dc
+             , use_yn
+             , del_yn
+             , reg_dt
+             , reg_user_id
+             , upd_dt
+             , upd_user_id
+          FROM tbl_comm_code
+         WHERE code_group_id = #{codeGroupId}
     </select>
 
 </mapper>
