@@ -24,12 +24,30 @@ public class NewsRssDao {
     }
 
     /**
-	 * 뉴스 RSS URL 목록
+     * 뉴스 RSS URL 페이지 전체 건수 조회
+     * @return
+     */
+    public int selectNewsRssPageCount(NewsRssVo newsRssVo) {
+    	
+    	return this.sqlSession.selectOne("NewsRss.selectNewsRssPageCount", newsRssVo);
+    }
+    
+    /**
+	 * 뉴스 RSS URL 페이지 목록 조회
 	 * @return
 	 */
-	public List<NewsRssVo> getNewsRssList() {
+	public List<NewsRssVo> selectNewsRssPageList(NewsRssVo newsRssVo) {
 		
-		return this.sqlSession.selectList("NewsRss.selectNewsRssList");
+		return this.sqlSession.selectList("NewsRss.selectNewsRssPageList", newsRssVo);
+	}
+
+	/**
+	 * 뉴스 RSS URL 목록 조회
+	 * @return
+	 */
+	public List<NewsRssVo> selectNewsRssList(NewsRssVo newsRssVo) {
+		
+		return this.sqlSession.selectList("NewsRss.selectNewsRssList", newsRssVo);
 	}
 	
 }

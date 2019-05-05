@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `study`.`tbl_news` (
   `news_title` VARCHAR(200) NULL COMMENT '뉴스 제목',
   `news_content` BLOB NULL COMMENT '뉴스 내용',
   `news_url` VARCHAR(45) NULL COMMENT '뉴스 URL',
+  `pub_dt` VARCHAR(45) NULL COMMENT '발행 일시(publication date)',
   `reg_dt` DATE NOT NULL DEFAULT now() COMMENT '등록일시',
   `upd_dt` DATE NOT NULL DEFAULT now() COMMENT '수정일시',
   PRIMARY KEY (`news_seq`))

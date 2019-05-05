@@ -27,9 +27,27 @@ public class NewsRssService {
 	 * 뉴스 RSS URL 목록 조회
 	 * @return
 	 */
-	public List<NewsRssVo> getNewsRssList() {
+	public int selectNewsRssPageCount(NewsRssVo newsRssVo) {
 		
-		return newsRssDao.getNewsRssList();
+		return newsRssDao.selectNewsRssPageCount(newsRssVo);
+	}
+	
+	/**
+	 * 뉴스 RSS URL 목록 조회
+	 * @return
+	 */
+	public List<NewsRssVo> selectNewsRssPageList(NewsRssVo newsRssVo) {
+		
+		return newsRssDao.selectNewsRssPageList(newsRssVo);
+	}
+
+	/**
+	 * 뉴스 RSS URL 목록 조회
+	 * @return
+	 */
+	public List<NewsRssVo> selectNewsRssList(NewsRssVo newsRssVo) {
+		
+		return newsRssDao.selectNewsRssList(newsRssVo);
 	}
 
 }
