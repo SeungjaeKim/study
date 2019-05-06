@@ -38,6 +38,11 @@ public class NewsVo {
 	private String newsUrl;
 	
 	/**
+	 * 공개일시
+	 */
+	private String pubDt;
+	
+	/**
 	 * 등록일시
 	 */
 	private String regDt;

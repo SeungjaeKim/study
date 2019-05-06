@@ -4,6 +4,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.study.news.domain.NewsVo;
+
 @Repository
 public class NewsDao {
 	
@@ -14,9 +16,18 @@ public class NewsDao {
 	 * 뉴스 등록
 	 * @return
 	 */
-	public void getNewsList() {
+	public void selectNewsList() {
 		
 		this.sqlSession.insert("News.insertNews");
+	}
+
+	/**
+	 * 뉴스 조회
+	 * @param newsVo
+	 */
+	public NewsVo selectNews(NewsVo newsVo) {
+		
+		return this.sqlSession.selectOne("News.selectNews", newsVo);
 	}
 	
 }

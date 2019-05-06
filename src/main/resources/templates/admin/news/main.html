@@ -18,87 +18,88 @@
     <link href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet">
 </head>
 <body>
-<div class="page-header">
-  <h1>뉴스 RSS 등록</h1>
-</div>
-<div class="site-wrapper">
-	<form id="frm" class="form-horizontal">
-    <div class="form-group">
-        <label for="compCd" class="control-label col-sm-1">언론사 *</label>
-        <div class="col-sm-5">
-			<select class="form-control" id="compCd" name="compCd">
-			    <option value="">선택</option>
-                <option th:each="vo : ${newsCompCdList}" th:value="${vo.codeId}" th:text="${vo.codeNm}"></option>
-			</select>
-        </div>
-        <label for="clCd" class="col-sm-1 control-label">분야 *</label>
-        <div class="col-sm-5">
-            <select class="form-control" id="clCd" name="clCd">
-                <option value="">선택</option>
-                <option th:each="vo : ${newsClCdList}" th:value="${vo.codeId}" th:text="${vo.codeNm}"></option>
-            </select>
-        </div>
-    </div>
-	<div class="form-group">
-		<label for="rssUrl" class="col-sm-1 control-label">RSS URL *</label>
-		<div class="col-sm-11">
-	        <input type="text" class="form-control" id="rssUrl" name="rssUrl" placeholder="RSS URL" maxlength="300">
-        </div>
+<div class="container-fluid">
+	<div class="page-header">
+	  <h1>뉴스 RSS 등록</h1>
 	</div>
-	<div class="form-group">
-		<label for="useYn" class="col-sm-1 control-label">사용여부 *</label>
-		<div class="col-sm-11">
-			<div class="radio">
-			    <label><input type="radio" name="useYn" id="useYnY" value="Y" checked="checked">사용</label>
-			    <label><input type="radio" name="useYn" id="useYnN" value="N">미사용</label>
+	<div class="site-wrapper">
+        <div class="row">
+			<form id="frm" class="form-horizontal">
+		    <div class="form-group">
+		        <label for="compCd" class="control-label col-sm-1">언론사 *</label>
+		        <div class="col-sm-5">
+					<select class="form-control" id="compCd" name="compCd">
+					    <option value="">선택</option>
+		                <option th:each="vo : ${newsCompCdList}" th:value="${vo.codeId}" th:text="${vo.codeNm}"></option>
+					</select>
+		        </div>
+		        <label for="clCd" class="col-sm-1 control-label">분야 *</label>
+		        <div class="col-sm-5">
+		            <select class="form-control" id="clCd" name="clCd">
+		                <option value="">선택</option>
+		                <option th:each="vo : ${newsClCdList}" th:value="${vo.codeId}" th:text="${vo.codeNm}"></option>
+		            </select>
+		        </div>
+		    </div>
+			<div class="form-group">
+				<label for="rssUrl" class="col-sm-1 control-label">RSS URL *</label>
+				<div class="col-sm-11">
+			        <input type="text" class="form-control" id="rssUrl" name="rssUrl" placeholder="RSS URL" maxlength="300">
+		        </div>
 			</div>
-        </div>
+			<div class="form-group">
+				<label for="useYn" class="col-sm-1 control-label">사용여부 *</label>
+				<div class="col-sm-11">
+					<div class="radio">
+					    <label><input type="radio" name="useYn" id="useYnY" value="Y" checked="checked">사용</label>
+					    <label><input type="radio" name="useYn" id="useYnN" value="N">미사용</label>
+					</div>
+		        </div>
+			</div>
+			<div class="form-group">
+			    <div class="col-sm-10">
+		            <input type="button" value="저장" onclick="save()" class="btn btn-default">
+	                <input type="button" value="테스트" onclick="getCode()" class="btn btn-default">
+			    </div>
+			</div>
+			</form>
+		</div>
+		<div class="row">
+			<table class="table table-bordered">
+			    <thead>
+			        <tr>
+			            <th scope="col">일련번호</th>
+			            <th scope="col">URL</th>
+			            <th scope="col">사용여부</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			        <tr th:each="vo : ${newsRssList}">
+			            <th th:text="${vo.rssSeq}"></th>
+			            <th th:text="${vo.rssUrl}"></th>
+			            <th th:text="${vo.useYn}"></th>
+			        </tr>
+			    </tbody>
+			</table>
+			<nav>
+			    <ul class="pagination">
+			        <li th:classappend="${newsRssVo.firstPageNoOnPageList} == 1 ? null : disabled">
+			            <a href="#" aria-label="Previous">
+			                <span aria-hidden="true">&laquo;</span>
+			            </a>
+			        </li>
+			        <li th:each="idx,iterStat : ${#numbers.sequence(newsRssVo.firstPageNoOnPageList, newsRssVo.lastPageNoOnPageList)}" th:classappend="${newsRssVo.currentPageNo} == ${idx} ? active : null">
+			            <a th:onclick="|javascript:alert('${idx}')|" th:text="${idx}"></a>
+			        </li>
+			        <li th:classappend="${newsRssVo.lastPageNoOnPageList} * ${newsRssVo.pageSize} >= ${newsRssVo.totalRecordCount} ? null : disabled">
+			            <a href="#" aria-label="Next">
+			                <span aria-hidden="true">&raquo;</span>
+			            </a>
+			        </li>
+			    </ul>
+			</nav>
+		</div>
 	</div>
-	<div class="form-group">
-	    <div class="col-sm-12">
-	        <input type="button" value="저장" onclick="save()" class="btn btn-default">
-            <input type="button" value="테스트" onclick="getCode()" class="btn btn-default">
-        </div>
-	</div>
-	</form>
-	<table class="table table-bordered">
-	    <thead>
-	        <tr>
-	            <th scope="col">일련번호</th>
-	            <th scope="col">URL</th>
-	            <th scope="col">사용여부</th>
-	        </tr>
-	    </thead>
-	    <tbody>
-	        <tr th:each="vo : ${newsRssList}">
-	            <th th:text="${vo.rssSeq}"></th>
-	            <th th:text="${vo.rssUrl}"></th>
-	            <th th:text="${vo.useYn}"></th>
-	        </tr>
-	    </tbody>
-	</table>
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-		    <li class="page-item">
-		        <a class="page-link" href="#" aria-label="Previous">
-		            <span aria-hidden="true">&laquo;</span>
-		            <span class="sr-only">Previous</span>
-		        </a>
-		    </li>
-            <li class="page-item" th:each="idx,iterStat : ${#numbers.sequence(newsRssVo.firstPageNoOnPageList, newsRssVo.lastPageNoOnPageList)}" th:classappend="${newsRssVo.currentPageNo} == ${idx} ? active : null">
-              <a class="page-link" th:href="@{/samplehome/board/listPage(page=${idx}}" th:text="${idx}"></a>
-            </li>
-		    <li class="page-item">
-		        <a class="page-link" href="#" aria-label="Next">
-		            <span aria-hidden="true">&raquo;</span>
-		            <span class="sr-only">Next</span>
-		        </a>
-		    </li>
-		</ul>
-	</nav>
-	
-
-	
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

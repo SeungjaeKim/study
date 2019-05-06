@@ -11,13 +11,42 @@
 		                     , news_title
 		                     , news_content
 		                     , news_url
+		                     , pub_dt
+		                     , reg_dt
+		                     , upd_dt
 		                     )
 		VALUES ( #{compCd}
 		       , #{clCd}
 		       , #{newsTitle}
 		       , #{newsContent}
 		       , #{newsUrl}
+		       , #{pubDt}
+		       , NOW()
+		       , NOW()
 		       );
     </insert>
+    
+    <select id="selectNews" parameterType="com.study.news.domain.NewsVo" resultType="com.study.news.domain.NewsVo">
+        /* selectNews - 뉴스조회 */
+        
+        SELECT news_seq      /* 뉴스 일련번호 */
+             , comp_cd       /* 언론사 코드 */
+             , cl_cd         /* 분야 코드 */
+             , news_title    /* 뉴스 제목 */
+             , news_content  /* 뉴스 내용 */
+             , news_url      /* 뉴스 URL */
+             , pub_dt        /* 공개일시 */
+             , reg_dt        /* 등록일시 */
+             , upd_dt        /* 수정일시 */
+          FROM tbl_news      /* 뉴스 T */
+		<where>
+			<if test="compCd != null and !compCd.equals('')">
+			    AND comp_cd = #{compCd}    /* 언론사 코드 */
+			</if>
+			<if test="newsUrl != null and !newsUrl.equals('')">
+			    AND news_url = #{newsUrl}  /* 뉴스 URL */
+			</if>
+		</where>          
+    </select>
 
 </mapper>

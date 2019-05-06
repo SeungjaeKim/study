@@ -18,13 +18,13 @@ public class NewsRssService {
 	 * 뉴스 RSS URL 목록 조회
 	 * @return
 	 */
-	public int insertNewsRssList(NewsRssVo newsRssVo) {
+	public int insertNewsRss(NewsRssVo newsRssVo) {
 		
-		return newsRssDao.insertNewsRssList(newsRssVo);
+		return newsRssDao.insertNewsRss(newsRssVo);
 	}
 
 	/**
-	 * 뉴스 RSS URL 목록 조회
+	 * 뉴스 RSS URL 목록 데이터 건수 조회
 	 * @return
 	 */
 	public int selectNewsRssPageCount(NewsRssVo newsRssVo) {

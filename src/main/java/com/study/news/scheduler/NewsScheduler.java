@@ -80,20 +80,19 @@ public class NewsScheduler {
     				continue;
     			}
     			
+    			NodeList itemList = doc.getElementsByTagName("item");
     			
-    			NodeList nodeList2 = doc.getElementsByTagName("item");
-    			
-    			for(int temp = 0; temp < nodeList2.getLength(); temp++) {	
+    			for(int i = 0; i < itemList.getLength(); i++) {
     				
-    				Node nNode = nodeList2.item(temp);
+    				Node item = itemList.item(i);
     				
-    				if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+    				if(item.getNodeType() == Node.ELEMENT_NODE) {
     					
-    					Element eElement = (Element) nNode;
+    					Element eElement = (Element) item;
     					
-    				    Node newsItem = eElement.getElementsByTagName("title").item(0).getFirstChild();
+    				    Node titleNode = eElement.getElementsByTagName("title").item(0).getFirstChild();
     				    
-    				    log.info(newsItem.getNodeValue());
+    				    log.debug(titleNode.getNodeValue());
     				}
     			}
     		} catch (ParserConfigurationException | SAXException | IOException e) {

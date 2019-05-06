@@ -39,23 +39,18 @@ public class NewsController {
     	//공통코드 목록 조회 - G2:뉴스 분야
     	model.addAttribute("newsClCdList", commCodeService.selectCommCodeList("G2"));
     	
-//		PaginationInfo paginationInfo = new PaginationInfo();
-//		paginationInfo.setCurrentPageNo(1);        //현재 페이지 번호
-//		paginationInfo.setRecordCountPerPage(50);  //한 페이지에 게시되는 게시물 건수
-//		paginationInfo.setPageSize(10);            //페이징 리스트의 사이즈
-//		paginationInfo.setTotalRecordCount(newsRssService.selectNewsRssPageCount(newsRssVo));  //전체 게시물 건 수
-    	
-    	newsRssVo.setTotalRecordCount(newsRssService.selectNewsRssPageCount(newsRssVo));  //전체 게시물 건 수
+    	//뉴스 RSS URL 건수 조회
+    	newsRssVo.setTotalRecordCount(newsRssService.selectNewsRssPageCount(newsRssVo));
 		
 		List<NewsRssVo> newsRssList = new ArrayList<NewsRssVo>(); 
 		
-		if (newsRssVo.getTotalRecordCount()>0) {
+		if (newsRssVo.getTotalRecordCount() > 0) {
+			//뉴스 RSS URL 목록 조회
 			newsRssList = newsRssService.selectNewsRssPageList(newsRssVo);
 		}
 		
-		model.addAttribute("newsRssVo"     , newsRssVo);
-		model.addAttribute("newsRssList"   , newsRssList);
-//		model.addAttribute("paginationInfo", paginationInfo);
+		model.addAttribute("newsRssVo"  , newsRssVo);
+		model.addAttribute("newsRssList", newsRssList);
     	
         return "admin/news/main";
     }
@@ -65,7 +60,7 @@ public class NewsController {
     public HashMap<String, Object> save(NewsRssVo newsRssVo) {
 
     	//뉴스 RSS 등록
-    	newsRssService.insertNewsRssList(newsRssVo);
+    	newsRssService.insertNewsRss(newsRssVo);
 
         HashMap<String, Object> map = new HashMap<>();
         

@@ -38,19 +38,19 @@ CREATE TABLE IF NOT EXISTS `study`.`tbl_comm_code` (
 ENGINE = InnoDB
 ;
 
--- 뉴스 RSS
-CREATE TABLE IF NOT EXISTS `study`.`tbl_news_rss` (
-  `rss_seq` BIGINT(20) NOT NULL COMMENT '일련번호',
+-- 뉴스 RSS URL
+CREATE TABLE IF NOT EXISTS `study`.`tbl_news_rss_url` (
+  `rss_url_seq` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT 'RSS URL 일련번호',
   `comp_cd` VARCHAR(45) NULL COMMENT '언론사 코드 - G1',
   `cl_cd` VARCHAR(45) NULL COMMENT '뉴스 분야 코드 - G2',
   `rss_url` VARCHAR(300) NOT NULL COMMENT 'RSS URL',
   `use_yn` VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT '사용여부 YN',
   `last_build_date` VARCHAR(100) NULL COMMENT '마지막 작성 일시',
   `reg_dt` DATE NOT NULL DEFAULT now() COMMENT '등록일시',
-  `reg_user_id` VARCHAR(45) NULL COMMENT '등록 사용자 아이디',
+  `reg_user_id` VARCHAR(45) NULL COMMENT '등록자 아이디',
   `upd_dt` DATE NOT NULL DEFAULT now() COMMENT '수정일시',
-  `upd_user_id` VARCHAR(45) NULL COMMENT '수정 사용자 아이디',
-  PRIMARY KEY (`rss_seq`),
+  `upd_user_id` VARCHAR(45) NULL COMMENT '수정자 아이디',
+  PRIMARY KEY (`rss_url_seq`),
   UNIQUE INDEX `url_UNIQUE` (`rss_url` ASC))
 ENGINE = InnoDB
 ;

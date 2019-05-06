@@ -18,7 +18,7 @@ public class NewsRssDao {
      * 뉴스 RSS URL 등록
      * @return
      */
-    public int insertNewsRssList(NewsRssVo newsRssVo) {
+    public int insertNewsRss(NewsRssVo newsRssVo) {
     	
     	return this.sqlSession.insert("NewsRss.insertNewsRss", newsRssVo);
     }

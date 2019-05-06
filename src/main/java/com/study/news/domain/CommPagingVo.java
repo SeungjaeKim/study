@@ -16,28 +16,32 @@ public class CommPagingVo {
 		this.setTotalRecordCount(totalRecordCount);  // 전체 데이터 건수
 	}
 	
-	/**
+	/** 
 	 * 현재 페이지 번호 
 	 */
-	@Getter @Setter
+	@Getter 
+	@Setter
 	private int currentPageNo;
 	
 	/**
 	 * 한 페이지에 게시되는 데이터 건수
 	 */
-	@Getter @Setter
+	@Getter
+	@Setter
 	private int recordCountPerPage;
 	
 	/**
 	 * 페이징 리스트의 사이즈
 	 */
-	@Getter @Setter
+	@Getter
+	@Setter
 	private int pageSize;
 	
 	/**
 	 * 전데 데이터 건수
 	 */
-	@Getter @Setter
+	@Getter
+	@Setter
 	private int totalRecordCount;
 
 	private int totalPageCount;
