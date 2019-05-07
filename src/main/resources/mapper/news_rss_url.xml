@@ -38,22 +38,22 @@
     <select id="selectNewsRssPageList" parameterType="com.study.news.domain.NewsRssUrlVo" resultType="com.study.news.domain.NewsRssUrlVo">
         /* selectNewsRssPageList - 뉴스 RSS 페이지 목록 조회 */
         
-		SELECT rss_seq
+		SELECT rss_url_seq
              , rss_url
              , use_yn
 		  FROM tbl_news_rss_url a
 		      INNER JOIN (
-			      SELECT rss_seq 
+			      SELECT rss_url_seq 
 			        FROM tbl_news_rss_url 
 			      LIMIT #{firstRecordIndex}, #{recordCountPerPage}) b
-		USING(rss_seq)
+		USING(rss_url_seq)
     </select>
 
     <!-- 뉴스 RSS 목록 조회 -->
     <select id="selectNewsRssList" parameterType="com.study.news.domain.NewsRssUrlVo" resultType="com.study.news.domain.NewsRssUrlVo">
         /* selectNewsRssList - 뉴스 RSS 목록 조회 */
         
-		SELECT rss_seq
+		SELECT rss_url_seq
 		     , comp_cd
 		     , cl_cd
              , rss_url

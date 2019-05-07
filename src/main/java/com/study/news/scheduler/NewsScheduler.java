@@ -20,7 +20,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.study.news.domain.NewsRssUrlVo;
+import com.study.news.domain.NewsVo;
 import com.study.news.service.NewsRssUrlService;
+import com.study.news.service.NewsService;
 
 import lombok.extern.log4j.Log4j2;
  
@@ -28,8 +30,11 @@ import lombok.extern.log4j.Log4j2;
 @Component
 public class NewsScheduler {
     
+	@Autowired
+	private NewsService newsService;
+	
     @Autowired
-    private NewsRssUrlService newsRssService;
+    private NewsRssUrlService newsRssUrlService;
     
     /**
      * 스케줄러 동작 여부 - true:동작, false:동작안함
@@ -61,7 +66,7 @@ public class NewsScheduler {
         //뉴스 RSS 정보 조회
         NewsRssUrlVo newsRssVo = new NewsRssUrlVo();
         newsRssVo.setCompCd("G1C1");  //회사코드 - G1C1:한겨례
-        List<NewsRssUrlVo> newsRssList = newsRssService.selectNewsRssList(newsRssVo);
+        List<NewsRssUrlVo> newsRssList = newsRssUrlService.selectNewsRssList(newsRssVo);
         
         for (NewsRssUrlVo newsRss : newsRssList) {
         	
@@ -94,7 +99,10 @@ public class NewsScheduler {
     				    
     				    log.debug(titleNode.getNodeValue());
     				    
-    				    //insert 처리
+    				    //뉴스 등록
+    				    NewsVo newsVo = new NewsVo();
+    				    newsVo.setNewsTitle(titleNode.getNodeValue());  //뉴스 제목
+    				    newsService.insertNews(newsVo);
     				}
     			}
     		} catch (ParserConfigurationException | SAXException | IOException e) {

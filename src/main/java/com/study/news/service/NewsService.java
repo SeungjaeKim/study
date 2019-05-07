@@ -29,11 +29,11 @@ public class NewsService {
 		
 		//뉴스 등록
 		if (existNewsVo == null) {
-			//insert
+			newsDao.insertNews(newsVo);
 		}
 		//뉴스 수정
 		else if (0 < new Date(newsVo.getPubDt()).compareTo(new Date(existNewsVo.getPubDt()))) {
-			//update
+			newsDao.updateNews(newsVo);
 		}
 	}
 	
