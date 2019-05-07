@@ -5,20 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.study.news.dao.NewsRssDao;
-import com.study.news.domain.NewsRssVo;
+import com.study.news.dao.NewsRssUrlDao;
+import com.study.news.domain.NewsRssUrlVo;
 
 @Service
-public class NewsRssService {
+public class NewsRssUrlService {
 	
 	@Autowired
-	private NewsRssDao newsRssDao;
+	private NewsRssUrlDao newsRssDao;
 	
 	/**
 	 * 뉴스 RSS URL 목록 조회
 	 * @return
 	 */
-	public int insertNewsRss(NewsRssVo newsRssVo) {
+	public int insertNewsRss(NewsRssUrlVo newsRssVo) {
 		
 		return newsRssDao.insertNewsRss(newsRssVo);
 	}
@@ -27,7 +27,7 @@ public class NewsRssService {
 	 * 뉴스 RSS URL 목록 데이터 건수 조회
 	 * @return
 	 */
-	public int selectNewsRssPageCount(NewsRssVo newsRssVo) {
+	public int selectNewsRssPageCount(NewsRssUrlVo newsRssVo) {
 		
 		return newsRssDao.selectNewsRssPageCount(newsRssVo);
 	}
@@ -36,7 +36,7 @@ public class NewsRssService {
 	 * 뉴스 RSS URL 목록 조회
 	 * @return
 	 */
-	public List<NewsRssVo> selectNewsRssPageList(NewsRssVo newsRssVo) {
+	public List<NewsRssUrlVo> selectNewsRssPageList(NewsRssUrlVo newsRssVo) {
 		
 		return newsRssDao.selectNewsRssPageList(newsRssVo);
 	}
@@ -45,7 +45,7 @@ public class NewsRssService {
 	 * 뉴스 RSS URL 목록 조회
 	 * @return
 	 */
-	public List<NewsRssVo> selectNewsRssList(NewsRssVo newsRssVo) {
+	public List<NewsRssUrlVo> selectNewsRssList(NewsRssUrlVo newsRssVo) {
 		
 		return newsRssDao.selectNewsRssList(newsRssVo);
 	}

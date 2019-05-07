@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class NewsRssVo extends CommPagingVo {
+public class NewsRssUrlVo extends CommPagingVo {
 
 	/** RSS 일련번호 */
 	private Long rssSeq;

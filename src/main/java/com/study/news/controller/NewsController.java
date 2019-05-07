@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.study.news.domain.NewsRssVo;
+import com.study.news.domain.NewsRssUrlVo;
 import com.study.news.service.CommCodeService;
-import com.study.news.service.NewsRssService;
+import com.study.news.service.NewsRssUrlService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -28,10 +28,10 @@ public class NewsController {
     private CommCodeService commCodeService;
 	
     @Autowired
-    private NewsRssService newsRssService;
+    private NewsRssUrlService newsRssService;
 	
     @GetMapping("/admin/news/main")
-    public String main(Model model, NewsRssVo newsRssVo) {
+    public String main(Model model, NewsRssUrlVo newsRssVo) {
     	
     	//공통코드 목록 조회 - G1:뉴스 언론사
     	model.addAttribute("newsCompCdList", commCodeService.selectCommCodeList("G1"));
@@ -42,7 +42,7 @@ public class NewsController {
     	//뉴스 RSS URL 건수 조회
     	newsRssVo.setTotalRecordCount(newsRssService.selectNewsRssPageCount(newsRssVo));
 		
-		List<NewsRssVo> newsRssList = new ArrayList<NewsRssVo>(); 
+		List<NewsRssUrlVo> newsRssList = new ArrayList<NewsRssUrlVo>(); 
 		
 		if (newsRssVo.getTotalRecordCount() > 0) {
 			//뉴스 RSS URL 목록 조회
@@ -57,7 +57,7 @@ public class NewsController {
     
     @ResponseBody
     @PostMapping("/admin/news/main/save")
-    public HashMap<String, Object> save(NewsRssVo newsRssVo) {
+    public HashMap<String, Object> save(NewsRssUrlVo newsRssVo) {
 
     	//뉴스 RSS 등록
     	newsRssService.insertNewsRss(newsRssVo);

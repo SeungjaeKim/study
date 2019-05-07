@@ -19,8 +19,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.study.news.domain.NewsRssVo;
-import com.study.news.service.NewsRssService;
+import com.study.news.domain.NewsRssUrlVo;
+import com.study.news.service.NewsRssUrlService;
 
 import lombok.extern.log4j.Log4j2;
  
@@ -29,7 +29,7 @@ import lombok.extern.log4j.Log4j2;
 public class NewsScheduler {
     
     @Autowired
-    private NewsRssService newsRssService;
+    private NewsRssUrlService newsRssService;
     
     /**
      * 스케줄러 동작 여부 - true:동작, false:동작안함
@@ -59,11 +59,11 @@ public class NewsScheduler {
         //String url = "http://www.hani.co.kr/rss/politics";
         
         //뉴스 RSS 정보 조회
-        NewsRssVo newsRssVo = new NewsRssVo();
+        NewsRssUrlVo newsRssVo = new NewsRssUrlVo();
         newsRssVo.setCompCd("G1C1");  //회사코드 - G1C1:한겨례
-        List<NewsRssVo> newsRssList = newsRssService.selectNewsRssList(newsRssVo);
+        List<NewsRssUrlVo> newsRssList = newsRssService.selectNewsRssList(newsRssVo);
         
-        for (NewsRssVo newsRss : newsRssList) {
+        for (NewsRssUrlVo newsRss : newsRssList) {
         	
     		try {
     			
@@ -93,6 +93,8 @@ public class NewsScheduler {
     				    Node titleNode = eElement.getElementsByTagName("title").item(0).getFirstChild();
     				    
     				    log.debug(titleNode.getNodeValue());
+    				    
+    				    //insert 처리
     				}
     			}
     		} catch (ParserConfigurationException | SAXException | IOException e) {

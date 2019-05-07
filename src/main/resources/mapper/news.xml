@@ -26,6 +26,24 @@
 		       );
     </insert>
     
+    <update id="updateNews" parameterType="com.study.news.domain.NewsVo">
+        /* updateNews - 뉴스수정 */
+        
+        UPDATE tbl_news
+        <set>
+            <if test="newsTitle != null and !newsTitle.equals('')">
+                AND news_title = #{newsTitle}  /* 뉴스 제목 */
+            </if> 
+            <if test="pubDt != null and !pubDt.equals('')">
+                AND pub_dt = #{pubDt}  /* 공개일시 */
+            </if> 
+            <if test="newsContent != null and !newsContent.equals('')">
+                AND news_content = #{newsContent}  /* 뉴스 내용 */
+            </if> 
+        </set>
+        WHERE news_seq = #{newsSeq}
+    </update>
+    
     <select id="selectNews" parameterType="com.study.news.domain.NewsVo" resultType="com.study.news.domain.NewsVo">
         /* selectNews - 뉴스조회 */
         
@@ -48,5 +66,5 @@
 			</if>
 		</where>          
     </select>
-
+    
 </mapper>

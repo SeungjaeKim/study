@@ -16,9 +16,18 @@ public class NewsDao {
 	 * 뉴스 등록
 	 * @return
 	 */
-	public void selectNewsList() {
+	public void insertNewsList() {
 		
 		this.sqlSession.insert("News.insertNews");
+	}
+
+	/**
+	 * 뉴스 수정
+	 * @return
+	 */
+	public void updateNewsList() {
+		
+		this.sqlSession.update("News.updateNews");
 	}
 
 	/**
