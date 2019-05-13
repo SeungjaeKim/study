@@ -22,6 +22,15 @@ public class NewsRssUrlService {
 		
 		return newsRssDao.insertNewsRss(newsRssVo);
 	}
+	
+	/**
+	 * 뉴스 RSS 마지막 생성 일시 수정
+	 * @return
+	 */
+	public int updateLastBuildDateOfNewsRss(NewsRssUrlVo newsRssVo) {
+		
+		return this.newsRssDao.updateLastBuildDateOfNewsRss(newsRssVo);
+	}
 
 	/**
 	 * 뉴스 RSS URL 목록 데이터 건수 조회

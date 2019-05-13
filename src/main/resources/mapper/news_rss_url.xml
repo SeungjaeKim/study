@@ -23,8 +23,16 @@
                , #{regUserId}  /* 등록 사용자 아이디 */
                , NOW()         /* 수정일시 */
                , #{updUserId}  /* 수정 사용자 아이디 */
-               );
+               )
     </insert>
+    
+    <update id="updateLastBuildDateOfNewsRss" parameterType="com.study.news.domain.NewsRssUrlVo">
+        /* updateLastBuildDateOfNewsRss - 뉴스 RSS 마지막 생성 일시 수정 */
+    
+        UPDATE tbl_news_rss_url
+           SET last_build_date = #{lastBuildDate}
+         WHERE rss_url = #{rssUrl}
+    </update>
     
     <!-- 뉴스 RSS 페이지 전체 데이터 개수 조회 -->
     <select id="selectNewsRssPageCount" parameterType="com.study.news.domain.NewsRssUrlVo" resultType="java.lang.Integer">

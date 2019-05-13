@@ -49,10 +49,10 @@ public class NewsScheduler {
     }
 
     /**
-     * 5초에 한번씩 수행
+     * 10초에 한번씩 수행
      * @throws InterruptedException
      */
-    @Scheduled(fixedDelayString = "5000")
+    @Scheduled(fixedDelayString = "10000")  //스케줄러 동작 완료 후 설정된 시간뒤에 재실행
     public void job() throws InterruptedException {
 
         if(!isStart) {
@@ -68,11 +68,11 @@ public class NewsScheduler {
         newsRssVo.setCompCd("G1C1");  //회사코드 - G1C1:한겨례
         List<NewsRssUrlVo> newsRssList = newsRssUrlService.selectNewsRssList(newsRssVo);
         
-        for (NewsRssUrlVo newsRss : newsRssList) {
+        for (NewsRssUrlVo newsRssUrl : newsRssList) {
         	
     		try {
     			
-    			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(newsRss.getRssUrl());
+    			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(newsRssUrl.getRssUrl());
     			doc.getDocumentElement().normalize();
     			
     			//뉴스 마지막 생성 일시
@@ -80,7 +80,7 @@ public class NewsScheduler {
     			
     			Date lastBuildDate = new Date(lastBuildDateStr);
     			
-    			if (StringUtils.isNotBlank(newsRss.getLastBuildDate()) && 0 > lastBuildDate.compareTo(new Date(newsRss.getLastBuildDate()))) {
+    			if (StringUtils.isNotBlank(newsRssUrl.getLastBuildDate()) && 0 >= lastBuildDate.compareTo(new Date(newsRssUrl.getLastBuildDate()))) {
     				
     				continue;
     			}
@@ -96,15 +96,25 @@ public class NewsScheduler {
     					Element eElement = (Element) item;
     					
     				    Node titleNode = eElement.getElementsByTagName("title").item(0).getFirstChild();
+    				    Node linkNode = eElement.getElementsByTagName("link").item(0).getFirstChild();
+    				    Node pubDateNode = eElement.getElementsByTagName("pubDate").item(0).getFirstChild();
     				    
     				    log.debug(titleNode.getNodeValue());
     				    
     				    //뉴스 등록
     				    NewsVo newsVo = new NewsVo();
+    				    newsVo.setCompCd("G1G2");                       //언론사 코드
+    				    newsVo.setClCd("G2C1");                         //분야 코드
+    				    newsVo.setPubDt(pubDateNode.getNodeValue());    //공개 일시
+    				    newsVo.setNewsUrl(linkNode.getNodeValue());     //뉴스 주소
     				    newsVo.setNewsTitle(titleNode.getNodeValue());  //뉴스 제목
     				    newsService.insertNews(newsVo);
     				}
     			}
+    			
+    			//RSS 마지막 생성일시 갱신
+    			newsRssUrl.setLastBuildDate(lastBuildDateStr);  //RSS 마지막 생성 일시
+    			newsRssUrlService.updateLastBuildDateOfNewsRss(newsRssUrl);
     		} catch (ParserConfigurationException | SAXException | IOException e) {
     			e.printStackTrace();
     		}
