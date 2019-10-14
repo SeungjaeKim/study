@@ -87,7 +87,7 @@ public class NewsScheduler {
     			
     			NodeList itemList = doc.getElementsByTagName("item");
     			
-    			for(int i = 0; i < itemList.getLength(); i++) {
+    			for (int i = 0; i < itemList.getLength(); i++) {
     				
     				Node item = itemList.item(i);
     				
