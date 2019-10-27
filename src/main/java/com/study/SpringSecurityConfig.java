@@ -30,21 +30,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
  
     @Override
     public void configure(WebSecurity web) throws Exception {
-        // 허용되어야 할 경로들
-//        web.ignoring().antMatchers("/resources/**", 
-//                                   "/dist/**", 
-//                                   "/weather", 
-//                                   "/user/password/find",
-//                                   "/user/join",
-//                                   "/user/email",
-//                                   "/user/send/temppw",
-//                                   "/findpw", 
-//                                   "/user/findpw",
-//                                   "/user/cert/check",
-//                                   "/join", 
-//                                   "/getLanguage/**",
-//                                   "/getMessage"); // #3
-        web.ignoring().antMatchers("/admin/member/login");
+        // 로그인 없이 접근 가능한 URL
+        web.ignoring().antMatchers( "/css/**"
+        		                  , "/fonts/**"
+        		                  , "/js/**"
+        		                  , "/img/**"
+        		                  , "/favicon.ico"
+        		                  , "/startbootstrap-sb-admin-2-gh-pages/**"
+        		                  , "/error**"
+        		                  );
     }
     
     @Override
@@ -53,23 +47,24 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         // 로그인 설정
         http.authorizeRequests()
             // ROLE_USER, ROLE_ADMIN으로 권한 분리 유알엘 정의
-//            .antMatchers("/", "/user/login", "/error**").permitAll()
-            .antMatchers("/**").access("ROLE_USER")
-//            .antMatchers("/**").access("ROLE_ADMIN")
+            .antMatchers("/", "/login", "/loginForm", "/admin/user/login", "/admin/user/loginForm").permitAll()
             .antMatchers("/admin/**").access("ROLE_ADMIN")
-//            .antMatchers("/**").authenticated()
+            .antMatchers("/**").access("ROLE_USER")
+            .anyRequest().authenticated()
         .and()
             // 로그인 페이지 및 성공 url, handler 그리고 로그인 시 사용되는 id, password 파라미터 정의
             .formLogin()
-            .loginPage("/user/login")
+            .loginPage("/loginForm")
+            .loginProcessingUrl("/login")
+            .loginProcessingUrl("/admin/user/login")
             .defaultSuccessUrl("/")
 //            .failureHandler(authFailureHandler)
 //            .successHandler(authSuccessHandler)
-            .usernameParameter("id")
-            .passwordParameter("password")
+            .usernameParameter("email")
+            .passwordParameter("token")
         .and()    
             // 로그아웃 관련 설정
-            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .logoutSuccessUrl("/")
             .invalidateHttpSession(true)
         .and()

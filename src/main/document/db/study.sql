@@ -70,6 +70,22 @@ CREATE TABLE IF NOT EXISTS `study`.`tbl_news` (
 ENGINE = InnoDB
 ;
 
+-- 사용자
+CREATE TABLE IF NOT EXISTS `study`.`tb_user` (
+  `seq` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '일련번호',
+  `parent_site_type` VARCHAR(10) NOT NULL COMMENT '부모 사이트 종류',
+  `id` VARCHAR(20) NOT NULL COMMENT 'ID',
+  `name` VARCHAR(20) NOT NULL COMMENT '이름',
+  `image_url` VARCHAR(250) NULL COMMENT '이미지 URL',
+  `reg_dt` DATE NOT NULL COMMENT '등록일시',
+  `reg_user_id` VARCHAR(45) NULL COMMENT '등록자 ID',
+  `upd_dt` DATE NOT NULL COMMENT '수정일시',
+  `upd_user_id` VARCHAR(45) NULL COMMENT '수정자 ID',
+  PRIMARY KEY (`seq`),
+  INDEX `tb_user` (`parent_site_type` ASC, `id` ASC) )
+ENGINE = InnoDB
+;
+
 /* ****************************************************
  * 공통코드
  * ***************************************************/

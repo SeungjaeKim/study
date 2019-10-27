@@ -1,89 +1,100 @@
 package com.study;
 
-import java.util.Collection;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
- 
-/**
- * 인증 프로바이더
- * 로그인시 사용자가 입력한 아이디와 비밀번호를 확인하고 해당 권한을 주는 클래스
- * 
- */
+
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.study.user.domain.LoginUserVo;
+
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Component("authProvider")
-public class AuthProvider implements AuthenticationProvider  {
-    
+public class AuthProvider implements AuthenticationProvider {
+     
+//    @Autowired
+//    UserService userService; 
+	 
+	/**
+	 * 구글 API 클라이언트 ID
+	 */
+	@Value("${gapi.client.id}")
+	private String gapiClientId;
+  
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String id = authentication.getName();
-        String password = "";
-//        String password = HashUtil.sha256(authentication.getCredentials().toString());
+        String loginEmail = authentication.getName();
+        String loginToken = authentication.getCredentials().toString();
         
-//        UserDto user = userService.selectUser(new UserDto(id));
-//        
-//        // email에 맞는 user가 없거나 비밀번호가 맞지 않는 경우.
-//        if (null == user || !user.getPassword().equals(password)) {
-//            return null;
-//        }
-//        
-//        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
-//        
-//        // 로그인한 계정에게 권한 부여
-//        if (user.isIsadmin()) {
-//            grantedAuthorityList.add(new SimpleGrantedAuthority(Constant.ROLE_TYPE.ROLE_ADMIN.toString()));
-//        } else {
-//            grantedAuthorityList.add(new SimpleGrantedAuthority(Constant.ROLE_TYPE.ROLE_USER.toString()));
-//        }
- 
-        // 로그인 성공시 로그인 사용자 정보 반환
-        return new Authentication() {
+        GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
+        	    .setAudience(Collections.singletonList(gapiClientId))
+        	    .build();
+        
+        try {
+			GoogleIdToken idToken = verifier.verify(loginToken);
 			
-			@Override
-			public String getName() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-				// TODO Auto-generated method stub
+			if (idToken != null) {
+				Payload payload = idToken.getPayload();
+
+				String userId = payload.getSubject();
+				System.out.println("User ID: " + userId);
+
+				// Get profile information from payload
+				String email = payload.getEmail();
+
+				boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+				String name = (String) payload.get("name");
+				String pictureUrl = (String) payload.get("picture");
+				String locale = (String) payload.get("locale");
+				String familyName = (String) payload.get("family_name");
+				String givenName = (String) payload.get("given_name");
+
+				log.info("email=" +  email);
+				log.info("name=" +  name);
 				
+				
+				if (loginEmail.equals(email)) {
+					
+					log.info("로그인성공@@@@");
+					
+				}
+				
+				
+				// Use or store profile information
+		        LoginUserVo loginUserVo = new LoginUserVo();
+		        loginUserVo.setEmail("12345@gmail.com");
+		        
+		        List<GrantedAuthority> roleList = new ArrayList<GrantedAuthority>();
+		        roleList.add(new SimpleGrantedAuthority("ROLE_USER"));
+		 
+		        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginEmail, loginEmail, roleList);
+		        authenticationToken.setDetails(loginUserVo);
+		        
+		        return authenticationToken;
+
+			} else {
+				throw new UsernameNotFoundException("User Not Found");
 			}
-			
-			@Override
-			public boolean isAuthenticated() {
-				// TODO Auto-generated method stub
-				return false;
-			}
-			
-			@Override
-			public Object getPrincipal() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public Object getDetails() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public Object getCredentials() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public Collection<? extends GrantedAuthority> getAuthorities() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};// (id, password, grantedAuthorityList, user);
+		} catch (GeneralSecurityException | IOException e) {
+			throw new UsernameNotFoundException(e.getMessage(), e.fillInStackTrace());
+		}
     }
     
     @Override

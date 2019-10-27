@@ -46,6 +46,10 @@ logging:
       hibernate : info
   file: application.log
 
+#구글 API
+gapi:
+  client:
+    id: 904961043739-q6t04u0bcq6uspeu2cp82p8qe4di85sk.apps.googleusercontent.com
 
 #스케줄러
 scheduler:
