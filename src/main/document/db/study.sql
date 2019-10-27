@@ -91,10 +91,16 @@ ENGINE = InnoDB
  * ***************************************************/
 
 -- 뉴스 언론사
+INSERT INTO tbl_comm_code_group(code_group_id, code_group_nm, code_group_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G1', '뉴스 언론사', null, 'Y', 'N', NOW(), null, NOW(), null);
+
 INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
 VALUES('G1', 'G1C1', '한겨레', null, 'Y', 'N', NOW(), null, NOW(), null);
 
 -- 뉴스 분야
+INSERT INTO tbl_comm_code_group(code_group_id, code_group_nm, code_group_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', '뉴스 분야', null, 'Y', 'N', NOW(), null, NOW(), null);
+
 INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
 VALUES('G2', 'G2C1', '정치', null, 'Y', 'N', NOW(), null, NOW(), null);
 
@@ -130,3 +136,11 @@ VALUES('G2', 'G2C11', '주요기사', null, 'Y', 'N', NOW(), null, NOW(), null);
 
 INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
 VALUES('G2', 'G2C12', '인기기사', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+
+-- 사용자 계정의 사이트
+INSERT INTO tbl_comm_code_group(code_group_id, code_group_nm, code_group_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G3', '사용자 계정 사이트', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G3', 'G3C1', '구글', null, 'Y', 'N', NOW(), null, NOW(), null);

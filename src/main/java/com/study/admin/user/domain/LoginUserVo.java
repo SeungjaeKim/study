@@ -1,4 +1,4 @@
-package com.study.user.domain;
+package com.study.admin.user.domain;
 
 import java.util.Collection;
 

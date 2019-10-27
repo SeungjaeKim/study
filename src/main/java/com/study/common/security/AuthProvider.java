@@ -21,7 +21,8 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.study.user.domain.LoginUserVo;
+import com.study.admin.user.domain.LoginUserVo;
+import com.study.common.CommCode;
 
 import lombok.extern.log4j.Log4j2;
 
