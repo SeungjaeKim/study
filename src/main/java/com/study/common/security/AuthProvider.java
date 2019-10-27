@@ -1,4 +1,4 @@
-package com.study;
+package com.study.common.security;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;

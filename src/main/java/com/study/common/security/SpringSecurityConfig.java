@@ -1,4 +1,4 @@
-package com.study;
+package com.study.common.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,14 +19,23 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @ComponentScan(basePackages = {"com.study.*"})
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     
+	/**
+	 * 로그인 처리
+	 */
     @Autowired
     AuthProvider authProvider;
-    
-//    @Autowired
-//    AuthFailureHandler authFailureHandler;
- 
-//    @Autowired
-//    AuthSuccessHandler authSuccessHandler;
+
+    /**
+     * 로그인 실패 후 처리
+     */
+    @Autowired
+    AuthFailureHandler authFailureHandler;
+
+    /**
+     * 로그인 성공 후 처리
+     */
+    @Autowired
+    AuthSuccessHandler authSuccessHandler;
  
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -58,21 +67,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             .loginProcessingUrl("/login")
             .loginProcessingUrl("/admin/user/login")
             .defaultSuccessUrl("/")
-//            .failureHandler(authFailureHandler)
-//            .successHandler(authSuccessHandler)
+            .failureHandler(authFailureHandler)
+            .successHandler(authSuccessHandler).defaultSuccessUrl("/startbootstrap-sb-admin-2-gh-pages/index.html")
             .usernameParameter("email")
             .passwordParameter("token")
         .and()    
-            // 로그아웃 관련 설정
             .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .logoutSuccessUrl("/")
             .invalidateHttpSession(true)
         .and()
-            // csrf 사용유무 설정
-            // csrf 설정을 사용하면 모든 request에 csrf 값을 함께 전달해야한다.
             .csrf()
         .and()
-            // 로그인 프로세스가 진행될 provider
             .authenticationProvider(authProvider);
     }
 }
