@@ -70,15 +70,37 @@ CREATE TABLE IF NOT EXISTS `study`.`tbl_news` (
 ENGINE = InnoDB
 ;
 
+-- 사용자
+CREATE TABLE IF NOT EXISTS `study`.`tb_user` (
+  `seq` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '일련번호',
+  `parent_site_type` VARCHAR(10) NOT NULL COMMENT '부모 사이트 종류',
+  `id` VARCHAR(20) NOT NULL COMMENT 'ID',
+  `name` VARCHAR(20) NOT NULL COMMENT '이름',
+  `image_url` VARCHAR(250) NULL COMMENT '이미지 URL',
+  `reg_dt` DATE NOT NULL COMMENT '등록일시',
+  `reg_user_id` VARCHAR(45) NULL COMMENT '등록자 ID',
+  `upd_dt` DATE NOT NULL COMMENT '수정일시',
+  `upd_user_id` VARCHAR(45) NULL COMMENT '수정자 ID',
+  PRIMARY KEY (`seq`),
+  INDEX `tb_user` (`parent_site_type` ASC, `id` ASC) )
+ENGINE = InnoDB
+;
+
 /* ****************************************************
  * 공통코드
  * ***************************************************/
 
 -- 뉴스 언론사
+INSERT INTO tbl_comm_code_group(code_group_id, code_group_nm, code_group_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G1', '뉴스 언론사', null, 'Y', 'N', NOW(), null, NOW(), null);
+
 INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
 VALUES('G1', 'G1C1', '한겨레', null, 'Y', 'N', NOW(), null, NOW(), null);
 
 -- 뉴스 분야
+INSERT INTO tbl_comm_code_group(code_group_id, code_group_nm, code_group_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G2', '뉴스 분야', null, 'Y', 'N', NOW(), null, NOW(), null);
+
 INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
 VALUES('G2', 'G2C1', '정치', null, 'Y', 'N', NOW(), null, NOW(), null);
 
@@ -114,3 +136,11 @@ VALUES('G2', 'G2C11', '주요기사', null, 'Y', 'N', NOW(), null, NOW(), null);
 
 INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
 VALUES('G2', 'G2C12', '인기기사', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+
+-- 사용자 계정의 사이트
+INSERT INTO tbl_comm_code_group(code_group_id, code_group_nm, code_group_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G3', '사용자 계정 사이트', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G3', 'G3C1', '구글', null, 'Y', 'N', NOW(), null, NOW(), null);
