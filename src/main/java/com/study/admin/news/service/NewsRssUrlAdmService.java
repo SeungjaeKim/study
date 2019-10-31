@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.study.admin.news.dao.NewsRssUrlDao;
+import com.study.admin.news.dao.NewsRssUrlAdmDao;
 import com.study.admin.news.domain.NewsRssUrlVo;
 
 @Service
-public class NewsRssUrlService {
+public class NewsRssUrlAdmService {
 
 	@Autowired
-	private NewsRssUrlDao newsRssDao;
+	private NewsRssUrlAdmDao newsRssDao;
 
 	/**
 	 * 뉴스 RSS URL 목록 조회

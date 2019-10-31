@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.study.admin.news.domain.NewsVo;
 
 @Repository
-public class NewsDao {
+public class NewsAdmDao {
 
     @Autowired
 	private SqlSession sqlSession;

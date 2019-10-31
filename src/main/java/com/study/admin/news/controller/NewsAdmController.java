@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.study.admin.comm.service.CommCodeService;
+import com.study.admin.comm.service.CommCodeAdmService;
 import com.study.admin.news.domain.NewsRssUrlVo;
-import com.study.admin.news.service.NewsRssUrlService;
+import com.study.admin.news.service.NewsRssUrlAdmService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -22,22 +22,22 @@ import lombok.extern.log4j.Log4j2;
  */
 @Log4j2
 @Controller
-public class NewsController {
+public class NewsAdmController {
 
 	@Autowired
-    private CommCodeService commCodeService;
+    private CommCodeAdmService commCodeAdmService;
 
     @Autowired
-    private NewsRssUrlService newsRssService;
+    private NewsRssUrlAdmService newsRssService;
 
     @GetMapping("/admin/news/main")
     public String main(Model model, NewsRssUrlVo newsRssVo) {
 
     	//공통코드 목록 조회 - G1:뉴스 언론사
-    	model.addAttribute("newsCompCdList", commCodeService.selectCommCodeList("G1"));
+    	model.addAttribute("newsCompCdList", commCodeAdmService.selectCommCodeList("G1"));
 
     	//공통코드 목록 조회 - G2:뉴스 분야
-    	model.addAttribute("newsClCdList", commCodeService.selectCommCodeList("G2"));
+    	model.addAttribute("newsClCdList", commCodeAdmService.selectCommCodeList("G2"));
 
     	//뉴스 RSS URL 건수 조회
     	newsRssVo.setTotalRecordCount(newsRssService.selectNewsRssPageCount(newsRssVo));

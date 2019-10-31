@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.study.admin.comm.domain.CommCodeVo;
 
 @Repository
-public class CommCodeDao {
+public class CommCodeAdmDao {
 
     @Autowired
 	private SqlSession sqlSession;

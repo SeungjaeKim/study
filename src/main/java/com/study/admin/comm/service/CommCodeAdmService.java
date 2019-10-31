@@ -5,17 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.study.admin.comm.dao.CommCodeDao;
+import com.study.admin.comm.dao.CommCodeAdmDao;
 import com.study.admin.comm.domain.CommCodeVo;
 
 /**
  * 공통코드 서비스
  */
 @Service
-public class CommCodeService {
+public class CommCodeAdmService {
 
 	@Autowired
-	private CommCodeDao CommCodeDao;
+	private CommCodeAdmDao CommCodeAdmDao;
 
 	/**
 	 * 공통코드 목록 조회
@@ -34,7 +34,7 @@ public class CommCodeService {
 	 */
 	public List<CommCodeVo> selectCommCodeList(CommCodeVo commCodeVo) {
 
-		return CommCodeDao.selectCommCodeList(commCodeVo);
+		return CommCodeAdmDao.selectCommCodeList(commCodeVo);
 	}
 
 }

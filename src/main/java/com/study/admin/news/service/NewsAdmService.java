@@ -5,14 +5,14 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.study.admin.news.dao.NewsDao;
+import com.study.admin.news.dao.NewsAdmDao;
 import com.study.admin.news.domain.NewsVo;
 
 @Service
-public class NewsService {
+public class NewsAdmService {
 
 	@Autowired
-	private NewsDao newsDao;
+	private NewsAdmDao newsAdmDao;
 
 	/**
 	 * 뉴스 등록
@@ -25,15 +25,15 @@ public class NewsService {
 		NewsVo existNewsVo = new NewsVo();
 		existNewsVo.setCompCd(newsVo.getCompCd());         //언론사 코드
 		existNewsVo.setNewsUrl(existNewsVo.getNewsUrl());  //뉴스 URL
-		existNewsVo = newsDao.selectNews(newsVo);
+		existNewsVo = newsAdmDao.selectNews(newsVo);
 
 		//뉴스 등록
 		if (existNewsVo == null) {
-			newsDao.insertNews(newsVo);
+			newsAdmDao.insertNews(newsVo);
 		}
 		//뉴스 수정
 		else if (0 < new Date(newsVo.getPubDt()).compareTo(new Date(existNewsVo.getPubDt()))) {
-			newsDao.updateNews(newsVo);
+			newsAdmDao.updateNews(newsVo);
 		}
 	}
 
@@ -43,7 +43,7 @@ public class NewsService {
 	 */
 	public NewsVo selectNews(NewsVo newsVo) {
 
-		return newsDao.selectNews(newsVo);
+		return newsAdmDao.selectNews(newsVo);
 	}
 
 }

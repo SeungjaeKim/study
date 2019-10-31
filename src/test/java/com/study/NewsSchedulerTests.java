@@ -21,10 +21,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.study.news.domain.NewsRssUrlVo;
-import com.study.news.domain.NewsVo;
-import com.study.news.service.NewsRssUrlService;
-import com.study.news.service.NewsService;
+import com.study.admin.news.domain.NewsRssUrlVo;
+import com.study.admin.news.domain.NewsVo;
+import com.study.admin.news.service.NewsAdmService;
+import com.study.admin.news.service.NewsRssUrlAdmService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -34,17 +34,17 @@ import lombok.extern.log4j.Log4j2;
 public class NewsSchedulerTests {
 
 	@Autowired
-	private NewsService newsService;
-	
+	private NewsAdmService newsAdmService;
+
     @Autowired
-    private NewsRssUrlService newsRssUrlService;
-	
+    private NewsRssUrlAdmService newsRssUrlAdmService;
+
     /**
      * 스케줄러 동작 여부 - true:동작, false:동작안함
      */
     @Value("${scheduler.news.isStart}")
     private Boolean isStart;
-    
+
     @PostConstruct
     public void init() {
         //시작 로그 출력
@@ -62,51 +62,51 @@ public class NewsSchedulerTests {
 //        if(!isStart) {
 //            return;
 //        }
-        
+
         //compCd = G1C1	-> 한겨례
         //clCd = G2C1   -> 정치
         //String url = "http://www.hani.co.kr/rss/politics";
-        
+
         //뉴스 RSS 정보 조회
         NewsRssUrlVo newsRssVo = new NewsRssUrlVo();
         newsRssVo.setCompCd("G1C1");  //회사코드 - G1C1:한겨례
-        List<NewsRssUrlVo> newsRssList = newsRssUrlService.selectNewsRssList(newsRssVo);
-        
+        List<NewsRssUrlVo> newsRssList = newsRssUrlAdmService.selectNewsRssList(newsRssVo);
+
         for (NewsRssUrlVo newsRss : newsRssList) {
-        	
+
     		try {
-    			
+
     			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(newsRss.getRssUrl());
     			doc.getDocumentElement().normalize();
-    			
+
     			//뉴스 마지막 생성 일시
     			String lastBuildDateStr = doc.getElementsByTagName("lastBuildDate").item(0).getFirstChild().getNodeValue();
-    			
+
     			Date lastBuildDate = new Date(lastBuildDateStr);
-    			
+
     			if (StringUtils.isNotBlank(newsRss.getLastBuildDate()) && 0 > lastBuildDate.compareTo(new Date(newsRss.getLastBuildDate()))) {
-    				
+
     				continue;
     			}
-    			
+
     			NodeList itemList = doc.getElementsByTagName("item");
-    			
+
     			for(int i = 0; i < itemList.getLength(); i++) {
-    				
+
     				Node item = itemList.item(i);
-    				
+
     				if(item.getNodeType() == Node.ELEMENT_NODE) {
-    					
+
     					Element eElement = (Element) item;
-    					
+
     				    Node titleNode = eElement.getElementsByTagName("title").item(0).getFirstChild();
-    				    
+
     				    log.debug(titleNode.getNodeValue());
-    				    
+
     				    //뉴스 등록
     				    NewsVo newsVo = new NewsVo();
     				    newsVo.setNewsTitle(titleNode.getNodeValue());  //뉴스 제목
-    				    newsService.insertNews(newsVo);
+    				    newsAdmService.insertNews(newsVo);
     				}
     			}
     		} catch (ParserConfigurationException | SAXException | IOException e) {

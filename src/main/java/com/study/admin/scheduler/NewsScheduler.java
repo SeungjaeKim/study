@@ -21,8 +21,8 @@ import org.xml.sax.SAXException;
 
 import com.study.admin.news.domain.NewsRssUrlVo;
 import com.study.admin.news.domain.NewsVo;
-import com.study.admin.news.service.NewsRssUrlService;
-import com.study.admin.news.service.NewsService;
+import com.study.admin.news.service.NewsRssUrlAdmService;
+import com.study.admin.news.service.NewsAdmService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -31,10 +31,10 @@ import lombok.extern.log4j.Log4j2;
 public class NewsScheduler {
 
 	@Autowired
-	private NewsService newsService;
+	private NewsAdmService newsAdmService;
 
     @Autowired
-    private NewsRssUrlService newsRssUrlService;
+    private NewsRssUrlAdmService newsRssUrlAdmService;
 
     /**
      * 스케줄러 동작 여부 - true:동작, false:동작안함
@@ -66,7 +66,7 @@ public class NewsScheduler {
         //뉴스 RSS 정보 조회
         NewsRssUrlVo newsRssVo = new NewsRssUrlVo();
         newsRssVo.setCompCd("G1C1");  //회사코드 - G1C1:한겨례
-        List<NewsRssUrlVo> newsRssList = newsRssUrlService.selectNewsRssList(newsRssVo);
+        List<NewsRssUrlVo> newsRssList = newsRssUrlAdmService.selectNewsRssList(newsRssVo);
 
         for (NewsRssUrlVo newsRssUrl : newsRssList) {
 
@@ -108,13 +108,13 @@ public class NewsScheduler {
     				    newsVo.setPubDt(pubDateNode.getNodeValue());    //공개 일시
     				    newsVo.setNewsUrl(linkNode.getNodeValue());     //뉴스 주소
     				    newsVo.setNewsTitle(titleNode.getNodeValue());  //뉴스 제목
-    				    newsService.insertNews(newsVo);
+    				    newsAdmService.insertNews(newsVo);
     				}
     			}
 
     			//RSS 마지막 생성일시 갱신
     			newsRssUrl.setLastBuildDate(lastBuildDateStr);  //RSS 마지막 생성 일시
-    			newsRssUrlService.updateLastBuildDateOfNewsRss(newsRssUrl);
+    			newsRssUrlAdmService.updateLastBuildDateOfNewsRss(newsRssUrl);
     		} catch (ParserConfigurationException | SAXException | IOException e) {
     			e.printStackTrace();
     		}

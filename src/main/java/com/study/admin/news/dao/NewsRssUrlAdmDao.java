@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.study.admin.news.domain.NewsRssUrlVo;
 
 @Repository
-public class NewsRssUrlDao {
+public class NewsRssUrlAdmDao {
 
     @Autowired
 	private SqlSession sqlSession;
