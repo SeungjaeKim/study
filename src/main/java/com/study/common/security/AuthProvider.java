@@ -24,9 +24,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.study.admin.user.domain.LoginUserVo;
 import com.study.admin.user.service.UserAdmService;
-import com.study.common.CommCode;
-
-import lombok.extern.log4j.Log4j2;
+import com.study.common.constant.CommCode;
 
 @Component("authProvider")
 public class AuthProvider implements AuthenticationProvider {
