@@ -28,7 +28,6 @@ import com.study.common.CommCode;
 
 import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Component("authProvider")
 public class AuthProvider implements AuthenticationProvider {
 
@@ -91,10 +90,10 @@ public class AuthProvider implements AuthenticationProvider {
 					}
 				} else {
 					//신규 사용자
+					loginUserVo.setName(name);
+			        loginUserVo.setParentSiteTy(CommCode.parentSiteTy.GOOGLE);
+					userAdmService.insertUser(loginUserVo);
 				}
-
-		        loginUserVo.setName(name);
-		        loginUserVo.setParentSiteTy(CommCode.parentSiteTy.GOOGLE);
 
 		        //사용자 권한 정보 설정
 		        List<GrantedAuthority> roleList = new ArrayList<GrantedAuthority>();

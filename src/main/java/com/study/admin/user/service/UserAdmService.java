@@ -13,6 +13,16 @@ public class UserAdmService {
 	private UserAdmDao userAdmDao;
 
 	/**
+	 * 사용자 등록
+	 * @param userVo
+	 * @return
+	 */
+	public int insertUser(UserVo userVo) {
+
+		return userAdmDao.insertUser(userVo);
+	}
+
+	/**
 	 * 사용자 조회
 	 * @return userVo
 	 */

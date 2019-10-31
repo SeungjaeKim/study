@@ -13,15 +13,6 @@ public class UserAdmDao {
 	private SqlSession sqlSession;
 
 	/**
-	 * 사용자 조회
-	 * @param userVo
-	 */
-	public UserVo selectUser(UserVo userVo) {
-
-		return this.sqlSession.selectOne("User_adm.selectUser", userVo);
-	}
-
-	/**
 	 * 사용자 등록
 	 * @param userVo
 	 * @return
@@ -29,6 +20,15 @@ public class UserAdmDao {
 	public int insertUser(UserVo userVo) {
 
 		return this.sqlSession.insert("User_adm.insertUser", userVo);
+	}
+
+	/**
+	 * 사용자 조회
+	 * @param userVo
+	 */
+	public UserVo selectUser(UserVo userVo) {
+
+		return this.sqlSession.selectOne("User_adm.selectUser", userVo);
 	}
 
 }
