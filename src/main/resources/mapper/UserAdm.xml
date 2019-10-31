@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="User_adm">
+<mapper namespace="UserAdm">
 
     <select id="selectUser" parameterType="com.study.admin.user.domain.UserVo" resultType="com.study.admin.user.domain.UserVo">
         /* selectUser - 사용자 조회 */

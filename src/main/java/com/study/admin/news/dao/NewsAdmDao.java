@@ -18,7 +18,7 @@ public class NewsAdmDao {
 	 */
 	public int insertNews(NewsVo newsVo) {
 
-		return this.sqlSession.insert("News.insertNews", newsVo);
+		return this.sqlSession.insert("NewsAdm.insertNews", newsVo);
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class NewsAdmDao {
 	 */
 	public int updateNews(NewsVo newsVo) {
 
-		return this.sqlSession.update("News.updateNews", newsVo);
+		return this.sqlSession.update("NewsAdm.updateNews", newsVo);
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class NewsAdmDao {
 	 */
 	public NewsVo selectNews(NewsVo newsVo) {
 
-		return this.sqlSession.selectOne("News.selectNews", newsVo);
+		return this.sqlSession.selectOne("NewsAdm.selectNews", newsVo);
 	}
 
 }

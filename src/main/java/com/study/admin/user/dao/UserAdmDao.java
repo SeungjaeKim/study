@@ -19,7 +19,7 @@ public class UserAdmDao {
 	 */
 	public int insertUser(UserVo userVo) {
 
-		return this.sqlSession.insert("User_adm.insertUser", userVo);
+		return this.sqlSession.insert("UserAdm.insertUser", userVo);
 	}
 
 	/**
@@ -28,7 +28,7 @@ public class UserAdmDao {
 	 */
 	public UserVo selectUser(UserVo userVo) {
 
-		return this.sqlSession.selectOne("User_adm.selectUser", userVo);
+		return this.sqlSession.selectOne("UserAdm.selectUser", userVo);
 	}
 
 }

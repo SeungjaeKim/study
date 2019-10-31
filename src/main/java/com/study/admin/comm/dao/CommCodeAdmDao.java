@@ -20,7 +20,7 @@ public class CommCodeAdmDao {
 	 */
 	public List<CommCodeVo> selectCommCodeList(CommCodeVo commCodeVo) {
 
-		return this.sqlSession.selectList("CommCode.selectCommCodeList", commCodeVo);
+		return this.sqlSession.selectList("CommCodeAdm.selectCommCodeList", commCodeVo);
 	}
 
 }

@@ -38,7 +38,7 @@ public class NewsRssUrlAdmDao {
      */
     public int selectNewsRssPageCount(NewsRssUrlVo newsRssVo) {
 
-    	return this.sqlSession.selectOne("NewsRss.selectNewsRssPageCount", newsRssVo);
+    	return this.sqlSession.selectOne("NewsRssAdm.selectNewsRssPageCount", newsRssVo);
     }
 
     /**
@@ -47,7 +47,7 @@ public class NewsRssUrlAdmDao {
 	 */
 	public List<NewsRssUrlVo> selectNewsRssPageList(NewsRssUrlVo newsRssVo) {
 
-		return this.sqlSession.selectList("NewsRss.selectNewsRssPageList", newsRssVo);
+		return this.sqlSession.selectList("NewsRssAdm.selectNewsRssPageList", newsRssVo);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class NewsRssUrlAdmDao {
 	 */
 	public List<NewsRssUrlVo> selectNewsRssList(NewsRssUrlVo newsRssVo) {
 
-		return this.sqlSession.selectList("NewsRss.selectNewsRssList", newsRssVo);
+		return this.sqlSession.selectList("NewsRssAdm.selectNewsRssList", newsRssVo);
 	}
 
 }
