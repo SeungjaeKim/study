@@ -3,14 +3,14 @@ package com.study.admin.user.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.study.admin.user.dao.UserDao;
+import com.study.admin.user.dao.UserAdmDao;
 import com.study.admin.user.domain.UserVo;
 
 @Service
-public class UserService {
+public class UserAdmService {
 
 	@Autowired
-	private UserDao userDao;
+	private UserAdmDao userAdmDao;
 
 	/**
 	 * 사용자 조회
@@ -18,7 +18,7 @@ public class UserService {
 	 */
 	public UserVo selectUser(UserVo userVo) {
 
-		return userDao.selectUser(userVo);
+		return userAdmDao.selectUser(userVo);
 	}
 
 }

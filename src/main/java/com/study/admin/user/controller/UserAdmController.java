@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 어드민 사용자
  */
 @Controller
-public class UserController {
+public class UserAdmController {
 	
     /**
      * 구글 API 클라이언트 ID
