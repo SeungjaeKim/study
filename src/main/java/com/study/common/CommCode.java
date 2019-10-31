@@ -2,10 +2,10 @@ package com.study.common;
 
 public class CommCode {
 
-	public enum test {
-		test();
-		
-		public static final String a = "a";
+	public enum parentSiteTy {
+		parentSiteTy();
+
+		public static final String GOOGLE = "G3C1";
 	}
-	
+
 }

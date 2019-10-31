@@ -4,21 +4,31 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.study.news.domain.NewsVo;
+import com.study.admin.user.domain.UserVo;
 
 @Repository
 public class UserDao {
-	
+
     @Autowired
 	private SqlSession sqlSession;
-	  
+
 	/**
-	 * 뉴스 조회
-	 * @param newsVo
+	 * 사용자 조회
+	 * @param userVo
 	 */
-	public NewsVo selectNews(NewsVo newsVo) {
-		
-		return this.sqlSession.selectOne("News.selectNews", newsVo);
+	public UserVo selectUser(UserVo userVo) {
+
+		return this.sqlSession.selectOne("User_adm.selectUser", userVo);
 	}
-	
+
+	/**
+	 * 사용자 등록
+	 * @param userVo
+	 * @return
+	 */
+	public int insertUser(UserVo userVo) {
+
+		return this.sqlSession.insert("User_adm.insertUser", userVo);
+	}
+
 }

@@ -3,22 +3,22 @@ package com.study.admin.user.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.study.news.dao.NewsDao;
-import com.study.news.domain.NewsVo;
+import com.study.admin.user.dao.UserDao;
+import com.study.admin.user.domain.UserVo;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
-	private NewsDao newsDao;
-	
+	private UserDao userDao;
+
 	/**
-	 * 뉴스 조회
-	 * @return newsVo
+	 * 사용자 조회
+	 * @return userVo
 	 */
-	public NewsVo selectNews(NewsVo newsVo) {
-		
-		return newsDao.selectNews(newsVo);
+	public UserVo selectUser(UserVo userVo) {
+
+		return userDao.selectUser(userVo);
 	}
 
 }

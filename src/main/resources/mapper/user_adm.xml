@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="User_adm">
+
+    <select id="selectUser" parameterType="com.study.admin.user.domain.UserVo" resultType="com.study.admin.user.domain.UserVo">
+        /* selectUser - 사용자 조회 */
+
+        SELECT id
+             , name
+             , parent_site_ty
+             , user_yn
+          FROM tb_user  /* 사용자 T */
+		<where>
+			<if test="id != null and !id.equals('')">
+			    AND id = #{id}  /* 언론사 코드 */
+			</if>
+			<if test="parentSiteTy != null and !parentSiteTy.equals('')">
+			    AND parent_site_ty = #{parentSiteTy}  /* 부모 사이트 종류 */
+			</if>
+		</where>
+    </select>
+
+    <insert id="insertUser" parameterType="com.study.admin.user.domain.UserVo">
+    	/* inserUser - 사용자 등록 */
+
+    	INSERT INTO tb_user ( id
+    	                    , name
+    	                    , parentSiteTy
+    	                    )
+		VALUES ( #{id}
+		       , #{name}
+		       , #{parentSiteTy}
+		       )
+    </insert>
+
+</mapper>
