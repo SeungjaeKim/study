@@ -144,3 +144,32 @@ VALUES('G3', '사용자 계정 사이트', null, 'Y', 'N', NOW(), null, NOW(), n
 
 INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
 VALUES('G3', 'G3C1', '구글', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+INSERT INTO tbl_comm_code(code_group_id, code_id, code_nm, code_dc, use_yn, del_yn, reg_dt, reg_user_id, upd_dt, upd_user_id)
+VALUES('G3', 'G3C2', '네이버', null, 'Y', 'N', NOW(), null, NOW(), null);
+
+
+-- 로그인 시도
+	로그인 시도 일련번호
+	사용자 일련번호
+	접근 아이피
+	로그인 성공실패 여부
+	일시
+
+
+-- 사용자
+	로그인 실패 건수
+
+
+-- 번호
+	회차
+	당첨일자
+	번호1~6
+	보너스
+	등록일시
+
+
+TODO
+	용어사진
+	과거 회차 번호 등록
+

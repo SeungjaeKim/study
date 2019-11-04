@@ -51,60 +51,62 @@ public class AuthProvider implements AuthenticationProvider {
 			GoogleIdToken idToken = verifier.verify(loginToken);
 
 			if (idToken != null) {
-				Payload payload = idToken.getPayload();
-
-				String userId = payload.getSubject();
-				String email  = payload.getEmail();
-				String name   = (String) payload.get("name");
-
-				//TODO 정확한 사용법을 확인하자
-				boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-
-//				String pictureUrl = (String) payload.get("picture");
-//				String locale     = (String) payload.get("locale");
-//				String familyName = (String) payload.get("family_name");
-//				String givenName  = (String) payload.get("given_name");
-
-				//로그인화면에서 전달된 이메일과 인증토큰을 통해 조회된 이메일을 비교하여
-				//동일한 경우에만 로그인 성공으로 판단한다
-				if (!loginEmail.equals(email)) {
-					throw new UsernameNotFoundException("User Not Found");
-				}
-
-				//기존 사용자 조회
-				LoginUserVo loginUserVo = new LoginUserVo();
-				loginUserVo.setId(userId);
-				loginUserVo.setEmail(email);
-				loginUserVo = (LoginUserVo) userAdmService.selectUser(loginUserVo);
-
-				//사용자 ID 확인
-				if (loginUserVo != null) {
-					//기존 사용자
-					if (userId.equals(loginUserVo.getId())) {
-
-					}
-					else {
-						throw new UsernameNotFoundException("User Not Found");
-					}
-				} else {
-					//신규 사용자
-					loginUserVo.setName(name);
-			        loginUserVo.setParentSiteTy(CommCode.parentSiteTy.GOOGLE);
-					userAdmService.insertUser(loginUserVo);
-				}
-
-		        //사용자 권한 정보 설정
-		        List<GrantedAuthority> roleList = new ArrayList<GrantedAuthority>();
-		        roleList.add(new SimpleGrantedAuthority("ROLE_USER"));
-
-		        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginEmail, loginEmail, roleList);
-		        authenticationToken.setDetails(loginUserVo);
-
-		        return authenticationToken;
-
-			} else {
 				throw new UsernameNotFoundException("User Not Found");
 			}
+
+			Payload payload = idToken.getPayload();
+
+			String userId = payload.getSubject();
+			String email  = payload.getEmail();
+			String name   = (String) payload.get("name");
+
+			//TODO 정확한 사용법을 확인하자
+			boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+
+//			String pictureUrl = (String) payload.get("picture");
+//			String locale     = (String) payload.get("locale");
+//			String familyName = (String) payload.get("family_name");
+//			String givenName  = (String) payload.get("given_name");
+
+			//로그인화면에서 전달된 이메일과 인증토큰을 통해 조회된 이메일을 비교하여
+			//동일한 경우에만 로그인 성공으로 판단한다
+			if (!loginEmail.equals(email)) {
+				throw new UsernameNotFoundException("User Not Found");
+			}
+
+			//기존 사용자 조회
+			LoginUserVo loginUserVo = new LoginUserVo();
+			loginUserVo.setId(userId);
+			loginUserVo.setEmail(email);
+			loginUserVo = (LoginUserVo) userAdmService.selectUser(loginUserVo);
+
+			//신규가입
+			if (loginUserVo == null) {
+				//신규 사용자 등록
+				loginUserVo.setName(name);
+		        loginUserVo.setParentSiteTy(CommCode.ParentSiteTy.GOOGLE.getCd());  //구글
+				userAdmService.insertUser(loginUserVo);
+			}
+			//ID 일치
+			else if (userId.equals(loginUserVo.getId())) {
+
+				//로그인 일시 정보 갱신
+
+			}
+			//ID 불일치
+			else {
+				throw new UsernameNotFoundException("User Not Found");
+			}
+
+	        //사용자 권한 정보 설정
+	        List<GrantedAuthority> roleList = new ArrayList<GrantedAuthority>();
+	        roleList.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+	        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginEmail, loginEmail, roleList);
+	        authenticationToken.setDetails(loginUserVo);
+
+	        return authenticationToken;
+
 		} catch (GeneralSecurityException | IOException e) {
 			throw new UsernameNotFoundException(e.getMessage(), e.fillInStackTrace());
 		}
