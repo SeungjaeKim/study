@@ -3,86 +3,86 @@
  * ***************************************************/
 
 -- 공통코드그룹
-CREATE TABLE IF NOT EXISTS `study`.`tbl_comm_code_group` (
-  `code_group_id` VARCHAR(45) NOT NULL COMMENT '코드 그룹 아이디',
-  `code_group_nm` VARCHAR(45) NULL COMMENT '코드 그룹 명',
-  `code_group_dc` VARCHAR(45) NULL COMMENT '코드 그룹 설명',
-  `use_yn` VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT '사용여부 YN',
-  `del_yn` VARCHAR(1) NOT NULL DEFAULT 'N' COMMENT '삭제여부 YN',
-  `reg_dt` DATE NOT NULL DEFAULT now() COMMENT '등록 일시',
-  `reg_user_id` VARCHAR(45) NULL COMMENT '등록 사용자 아이디',
-  `upd_dt` DATE NOT NULL DEFAULT now() COMMENT '수정 일시',
-  `upd_user_id` VARCHAR(45) NULL COMMENT '수정 사용자 아이디',
-  PRIMARY KEY (`code_group_id`))
+CREATE TABLE IF NOT EXISTS 'study'.'tbl_comm_code_group' (
+  'code_group_id' VARCHAR(45) NOT NULL COMMENT '코드 그룹 아이디',
+  'code_group_nm' VARCHAR(45) NULL COMMENT '코드 그룹 명',
+  'code_group_dc' VARCHAR(45) NULL COMMENT '코드 그룹 설명',
+  'use_yn' VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT '사용여부 YN',
+  'del_yn' VARCHAR(1) NOT NULL DEFAULT 'N' COMMENT '삭제여부 YN',
+  'reg_dt' DATE NOT NULL DEFAULT now() COMMENT '등록 일시',
+  'reg_user_id' VARCHAR(45) NULL COMMENT '등록 사용자 아이디',
+  'upd_dt' DATE NOT NULL DEFAULT now() COMMENT '수정 일시',
+  'upd_user_id' VARCHAR(45) NULL COMMENT '수정 사용자 아이디',
+  PRIMARY KEY ('code_group_id'))
 ENGINE = InnoDB
 ;
 
 -- 공통코드
-CREATE TABLE IF NOT EXISTS `study`.`tbl_comm_code` (
-  `code_group_id` VARCHAR(45) NOT NULL COMMENT '코드 그룹 아이디',
-  `code_id` VARCHAR(45) NOT NULL COMMENT '코드 아이디',
-  `code_nm` VARCHAR(45) NULL COMMENT '코드 명',
-  `code_dc` VARCHAR(45) NULL COMMENT '코드 설명',
-  `use_yn` VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT '사용여부 YN',
-  `del_yn` VARCHAR(1) NOT NULL DEFAULT 'N' COMMENT '삭제여부 YN',
-  `reg_dt` DATE NOT NULL DEFAULT now() COMMENT '등록일시',
-  `reg_user_id` VARCHAR(45) NULL COMMENT '등록 사용자 아이디',
-  `upd_dt` DATE NOT NULL DEFAULT now() COMMENT '수정일시',
-  `upd_user_id` VARCHAR(45) NULL COMMENT '수정 사용자 아이디',
-  PRIMARY KEY (`code_group_id`, `code_id`),
-  CONSTRAINT `fk_tbl_comm_code_tbl_comm_code_group1`
-    FOREIGN KEY (`code_group_id`)
-    REFERENCES `study`.`tbl_comm_code_group` (`code_group_id`)
+CREATE TABLE IF NOT EXISTS 'study'.'tbl_comm_code' (
+  'code_group_id' VARCHAR(45) NOT NULL COMMENT '코드 그룹 아이디',
+  'code_id' VARCHAR(45) NOT NULL COMMENT '코드 아이디',
+  'code_nm' VARCHAR(45) NULL COMMENT '코드 명',
+  'code_dc' VARCHAR(45) NULL COMMENT '코드 설명',
+  'use_yn' VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT '사용여부 YN',
+  'del_yn' VARCHAR(1) NOT NULL DEFAULT 'N' COMMENT '삭제여부 YN',
+  'reg_dt' DATE NOT NULL DEFAULT now() COMMENT '등록일시',
+  'reg_user_id' VARCHAR(45) NULL COMMENT '등록 사용자 아이디',
+  'upd_dt' DATE NOT NULL DEFAULT now() COMMENT '수정일시',
+  'upd_user_id' VARCHAR(45) NULL COMMENT '수정 사용자 아이디',
+  PRIMARY KEY ('code_group_id', 'code_id'),
+  CONSTRAINT 'fk_tbl_comm_code_tbl_comm_code_group1'
+    FOREIGN KEY ('code_group_id')
+    REFERENCES 'study'.'tbl_comm_code_group' ('code_group_id')
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 ;
 
 -- 뉴스 RSS URL
-CREATE TABLE IF NOT EXISTS `study`.`tbl_news_rss_url` (
-  `rss_url_seq` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT 'RSS URL 일련번호',
-  `comp_cd` VARCHAR(45) NULL COMMENT '언론사 코드 - G1',
-  `cl_cd` VARCHAR(45) NULL COMMENT '뉴스 분야 코드 - G2',
-  `rss_url` VARCHAR(300) NOT NULL COMMENT 'RSS URL',
-  `use_yn` VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT '사용여부 YN',
-  `last_build_date` VARCHAR(100) NULL COMMENT '마지막 작성 일시',
-  `reg_dt` DATE NOT NULL DEFAULT now() COMMENT '등록일시',
-  `reg_user_id` VARCHAR(45) NULL COMMENT '등록자 아이디',
-  `upd_dt` DATE NOT NULL DEFAULT now() COMMENT '수정일시',
-  `upd_user_id` VARCHAR(45) NULL COMMENT '수정자 아이디',
-  PRIMARY KEY (`rss_url_seq`),
-  UNIQUE INDEX `url_UNIQUE` (`rss_url` ASC))
+CREATE TABLE IF NOT EXISTS 'study'.'tbl_news_rss_url' (
+  'rss_url_seq' BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT 'RSS URL 일련번호',
+  'comp_cd' VARCHAR(45) NULL COMMENT '언론사 코드 - G1',
+  'cl_cd' VARCHAR(45) NULL COMMENT '뉴스 분야 코드 - G2',
+  'rss_url' VARCHAR(300) NOT NULL COMMENT 'RSS URL',
+  'use_yn' VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT '사용여부 YN',
+  'last_build_date' VARCHAR(100) NULL COMMENT '마지막 작성 일시',
+  'reg_dt' DATE NOT NULL DEFAULT now() COMMENT '등록일시',
+  'reg_user_id' VARCHAR(45) NULL COMMENT '등록자 아이디',
+  'upd_dt' DATE NOT NULL DEFAULT now() COMMENT '수정일시',
+  'upd_user_id' VARCHAR(45) NULL COMMENT '수정자 아이디',
+  PRIMARY KEY ('rss_url_seq'),
+  UNIQUE INDEX 'url_UNIQUE' ('rss_url' ASC))
 ENGINE = InnoDB
 ;
 
 -- 뉴스
-CREATE TABLE IF NOT EXISTS `study`.`tbl_news` (
-  `news_seq` INT NOT NULL AUTO_INCREMENT COMMENT '뉴스 고유번호',
-  `comp_cd` VARCHAR(45) NULL COMMENT '언론사 코드 - G1',
-  `cl_cd` VARCHAR(45) NULL COMMENT '뉴스 분야 코드 - G2',
-  `news_title` VARCHAR(200) NULL COMMENT '뉴스 제목',
-  `news_content` BLOB NULL COMMENT '뉴스 내용',
-  `news_url` VARCHAR(45) NULL COMMENT '뉴스 URL',
-  `pub_dt` VARCHAR(45) NULL COMMENT '발행 일시(publication date)',
-  `reg_dt` DATE NOT NULL DEFAULT now() COMMENT '등록일시',
-  `upd_dt` DATE NOT NULL DEFAULT now() COMMENT '수정일시',
-  PRIMARY KEY (`news_seq`))
+CREATE TABLE IF NOT EXISTS 'study'.'tbl_news' (
+  'news_seq' INT NOT NULL AUTO_INCREMENT COMMENT '뉴스 고유번호',
+  'comp_cd' VARCHAR(45) NULL COMMENT '언론사 코드 - G1',
+  'cl_cd' VARCHAR(45) NULL COMMENT '뉴스 분야 코드 - G2',
+  'news_title' VARCHAR(200) NULL COMMENT '뉴스 제목',
+  'news_content' BLOB NULL COMMENT '뉴스 내용',
+  'news_url' VARCHAR(45) NULL COMMENT '뉴스 URL',
+  'pub_dt' VARCHAR(45) NULL COMMENT '발행 일시(publication date)',
+  'reg_dt' DATE NOT NULL DEFAULT now() COMMENT '등록일시',
+  'upd_dt' DATE NOT NULL DEFAULT now() COMMENT '수정일시',
+  PRIMARY KEY ('news_seq'))
 ENGINE = InnoDB
 ;
 
 -- 사용자
-CREATE TABLE IF NOT EXISTS `study`.`tb_user` (
-  `seq` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '일련번호',
-  `parent_site_type` VARCHAR(10) NOT NULL COMMENT '부모 사이트 종류',
-  `id` VARCHAR(20) NOT NULL COMMENT 'ID',
-  `name` VARCHAR(20) NOT NULL COMMENT '이름',
-  `image_url` VARCHAR(250) NULL COMMENT '이미지 URL',
-  `reg_dt` DATE NOT NULL COMMENT '등록일시',
-  `reg_user_id` VARCHAR(45) NULL COMMENT '등록자 ID',
-  `upd_dt` DATE NOT NULL COMMENT '수정일시',
-  `upd_user_id` VARCHAR(45) NULL COMMENT '수정자 ID',
-  PRIMARY KEY (`seq`),
-  INDEX `tb_user` (`parent_site_type` ASC, `id` ASC) )
+CREATE TABLE IF NOT EXISTS 'study'.'tb_user' (
+  'seq' BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '일련번호',
+  'parent_site_type' VARCHAR(10) NOT NULL COMMENT '부모 사이트 종류',
+  'id' VARCHAR(20) NOT NULL COMMENT 'ID',
+  'name' VARCHAR(20) NOT NULL COMMENT '이름',
+  'image_url' VARCHAR(250) NULL COMMENT '이미지 URL',
+  'reg_dt' DATE NOT NULL COMMENT '등록일시',
+  'reg_user_id' VARCHAR(45) NULL COMMENT '등록자 ID',
+  'upd_dt' DATE NOT NULL COMMENT '수정일시',
+  'upd_user_id' VARCHAR(45) NULL COMMENT '수정자 ID',
+  PRIMARY KEY ('seq'),
+  INDEX 'tb_user' ('parent_site_type' ASC, 'id' ASC) )
 ENGINE = InnoDB
 ;
 
