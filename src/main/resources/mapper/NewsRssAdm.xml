@@ -37,7 +37,7 @@
 
     <!-- 뉴스 RSS 페이지 전체 데이터 개수 조회 -->
     <select id="selectNewsRssPageCount" parameterType="com.study.news.domain.NewsRssUrlVo" resultType="java.lang.Integer">
-        /* selectNewsRssPageCount - 뉴스 RSS 페이지 전체 데이터 개수 조회 */
+        /* selectNewsRssPageCount - 뉴스 RSS 페이지 전체 데이터 건수 조회 */
 
 		SELECT COUNT(*)
 		  FROM tbl_news_rss_url

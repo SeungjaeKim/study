@@ -19,6 +19,8 @@
              , upd_user_id
           FROM tbl_comm_code
          WHERE code_group_id = #{codeGroupId}
+
+         /* TODO 공통코드 정렬 추가 필요 */
     </select>
 
 </mapper>
