@@ -3,6 +3,9 @@ package com.study.common.constant;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 공통코드
+ */
 public class CommCode {
 
 	/**
@@ -21,6 +24,26 @@ public class CommCode {
 
 		YN(String cd) {
 			this.cd = cd;
+		}
+	}
+
+	/**
+	 * 로그인 실패 횟수
+	 */
+	public enum LoginFailCount {
+		/** 초기값 */
+		INIT(0, "기본값"),
+
+		/** 최대 로그인 실패 건수 */
+		MAX(5, "허용실패횟수");
+
+		private int cd;
+
+		private String nm;
+
+		LoginFailCount(int cd, String nm) {
+			this.cd = cd;
+			this.nm = nm;
 		}
 	}
 
