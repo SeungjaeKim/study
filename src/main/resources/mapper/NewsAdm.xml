@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 뉴스 -->
+<mapper namespace="NewsAdm">
+
+    <insert id="insertNews" parameterType="com.study.news.domain.NewsVo">
+        /* insertNews - 뉴스등록 */
+
+		INSERT INTO tbl_news ( comp_cd
+		                     , cl_cd
+		                     , news_title
+		                     , news_content
+		                     , news_url
+		                     , pub_dt
+		                     , reg_dt
+		                     , upd_dt
+		                     )
+		VALUES ( #{compCd}
+		       , #{clCd}
+		       , #{newsTitle}
+		       , #{newsContent}
+		       , #{newsUrl}
+		       , #{pubDt}
+		       , NOW()
+		       , NOW()
+		       );
+    </insert>
+
+    <update id="updateNews" parameterType="com.study.news.domain.NewsVo">
+        /* updateNews - 뉴스수정 */
+
+        UPDATE tbl_news
+        <set>
+            <if test="newsTitle != null and !newsTitle.equals('')">
+                AND news_title = #{newsTitle}  /* 뉴스 제목 */
+            </if>
+            <if test="pubDt != null and !pubDt.equals('')">
+                AND pub_dt = #{pubDt}  /* 공개일시 */
+            </if>
+            <if test="newsContent != null and !newsContent.equals('')">
+                AND news_content = #{newsContent}  /* 뉴스 내용 */
+            </if>
+        </set>
+        WHERE news_seq = #{newsSeq}
+    </update>
+
+    <select id="selectNews" parameterType="com.study.news.domain.NewsVo" resultType="com.study.news.domain.NewsVo">
+        /* selectNews - 뉴스조회 */
+
+        SELECT news_seq      /* 뉴스 일련번호 */
+             , comp_cd       /* 언론사 코드 */
+             , cl_cd         /* 분야 코드 */
+             , news_title    /* 뉴스 제목 */
+             , news_content  /* 뉴스 내용 */
+             , news_url      /* 뉴스 URL */
+             , pub_dt        /* 공개일시 */
+             , reg_dt        /* 등록일시 */
+             , upd_dt        /* 수정일시 */
+          FROM tbl_news      /* 뉴스 T */
+		<where>
+			<if test="compCd != null and !compCd.equals('')">
+			    AND comp_cd = #{compCd}    /* 언론사 코드 */
+			</if>
+			<if test="newsUrl != null and !newsUrl.equals('')">
+			    AND news_url = #{newsUrl}  /* 뉴스 URL */
+			</if>
+		</where>
+    </select>
+
+</mapper>

@@ -11,12 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("serial")
-public class LoginUserVo implements UserDetails {
+public class LoginUserVo extends UserVo implements UserDetails {
 
-	private String id;
-	
-	private String email;
-	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub

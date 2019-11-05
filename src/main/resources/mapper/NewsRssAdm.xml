@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 뉴스 RSS -->
+<mapper namespace="NewsRssAdm">
+
+    <insert id="insertNewsRss" parameterType="com.study.news.domain.NewsRssUrlVo">
+        /* insertNewsRss - 뉴스 RSS 등록 */
+
+        INSERT INTO tbl_news_rss_url ( comp_cd
+                                     , cl_cd
+                                     , rss_url
+                                     , use_yn
+                                     , reg_dt
+                                     , reg_user_id
+                                     , upd_dt
+                                     , upd_user_id
+                                     )
+        VALUES ( #{compCd}     /* 언론사 코드 - G1 */
+               , #{clCd}       /* 뉴스 분야 코드 - G2 */
+               , #{rssUrl}     /* RSS URL */
+               , #{useYn}      /* 사용여부 YN */
+               , NOW()         /* 등록일시 */
+               , #{regUserId}  /* 등록 사용자 아이디 */
+               , NOW()         /* 수정일시 */
+               , #{updUserId}  /* 수정 사용자 아이디 */
+               )
+    </insert>
+
+    <update id="updateLastBuildDateOfNewsRss" parameterType="com.study.news.domain.NewsRssUrlVo">
+        /* updateLastBuildDateOfNewsRss - 뉴스 RSS 마지막 생성 일시 수정 */
+
+        UPDATE tbl_news_rss_url
+           SET last_build_date = #{lastBuildDate}
+         WHERE rss_url = #{rssUrl}
+    </update>
+
+    <!-- 뉴스 RSS 페이지 전체 데이터 개수 조회 -->
+    <select id="selectNewsRssPageCount" parameterType="com.study.news.domain.NewsRssUrlVo" resultType="java.lang.Integer">
+        /* selectNewsRssPageCount - 뉴스 RSS 페이지 전체 데이터 건수 조회 */
+
+		SELECT COUNT(*)
+		  FROM tbl_news_rss_url
+    </select>
+
+    <!-- 뉴스 RSS 페이지 목록 조회 -->
+    <select id="selectNewsRssPageList" parameterType="com.study.news.domain.NewsRssUrlVo" resultType="com.study.news.domain.NewsRssUrlVo">
+        /* selectNewsRssPageList - 뉴스 RSS 페이지 목록 조회 */
+
+		SELECT rss_url_seq
+             , rss_url
+             , use_yn
+		  FROM tbl_news_rss_url a
+		      INNER JOIN (
+			      SELECT rss_url_seq
+			        FROM tbl_news_rss_url
+			      LIMIT #{firstRecordIndex}, #{recordCountPerPage}) b
+		USING(rss_url_seq)
+    </select>
+
+    <!-- 뉴스 RSS 목록 조회 -->
+    <select id="selectNewsRssList" parameterType="com.study.news.domain.NewsRssUrlVo" resultType="com.study.news.domain.NewsRssUrlVo">
+        /* selectNewsRssList - 뉴스 RSS 목록 조회 */
+
+		SELECT rss_url_seq
+		     , comp_cd
+		     , cl_cd
+             , rss_url
+             , use_yn
+             , last_build_date
+		  FROM tbl_news_rss_url a
+		 WHERE use_yn = 'Y'
+		   AND comp_cd = #{compCd}
+    </select>
+
+</mapper>

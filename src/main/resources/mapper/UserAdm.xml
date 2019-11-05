@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 사용자 -->
+<mapper namespace="UserAdm">
+
+    <insert id="insertUser" parameterType="com.study.admin.user.domain.UserVo">
+    	/* inserUser - 사용자 등록 */
+
+    	INSERT INTO tb_user ( id
+    	                    , name
+    	                    , parentSiteTy
+    	                    )
+		VALUES ( #{id}
+		       , #{name}          /* 이름 */
+		       , #{parentSiteTy}  /* 부모 사이트 종류 - G3 */
+		       )
+    </insert>
+
+	<!-- [TODO] -->
+    <update id="updateUserByLoginFailCount" parameterType="com.study.admin.user.domain.UserVo">
+    	/* updateUserByLoginFailCount - 로그인 실패 건수 수정 */
+
+    	UPDATE tb_user
+    	   SET login_fail_count = ${loginFailCount}  /* 로그인 실패 건수 */
+    	 WHERE parent_site_ty = #{parentSiteTy}      /* 부모 사이트 종류 - G3 */
+    	   AND id = #{id}
+    </update>
+
+    <select id="selectUser" parameterType="com.study.admin.user.domain.UserVo" resultType="com.study.admin.user.domain.UserVo">
+        /* selectUser - 사용자 조회 */
+
+        SELECT id
+             , name            /* 이름 */
+             , parent_site_ty  /* 부모 사이트 종류 - G3 */
+             , user_yn         /* 사용여부 YN */
+          FROM tb_user         /* 사용자 T */
+		<where>
+			<if test="id != null and !id.equals('')">
+			    AND id = #{id}
+			</if>
+			<if test="parentSiteTy != null and !parentSiteTy.equals('')">
+			    AND parent_site_ty = #{parentSiteTy}  /* 부모 사이트 종류 - G3 */
+			</if>
+		</where>
+    </select>
+
+	<!-- [TODO] -->
+	<select id="selectUserPageCount" parameterType="com.study.admin.user.domain.UserVo" resultType="java.lang.Integer">
+		/* selectUserPageCount - 사용자 페이지 전체 데이터 건수 조회 */
+
+	</select>
+
+	<!-- [TODO] -->
+	<select id="selectUserPageList" parameterType="com.study.admin.user.domain.UserVo" resultType="com.study.admin.user.domain.UserVo">
+		/* selectUserPageList - 사용자 페이지 목록 조회 */
+
+	</select>
+
+</mapper>
