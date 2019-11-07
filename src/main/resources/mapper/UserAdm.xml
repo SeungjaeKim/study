@@ -4,16 +4,24 @@
 <!-- 사용자 -->
 <mapper namespace="UserAdm">
 
-    <insert id="insertUser" parameterType="com.study.admin.user.domain.UserVo">
+    <insert id="insertUser" parameterType="com.study.admin.user.domain.UserVo" useGeneratedKeys="true" keyProperty="userSeq">
     	/* inserUser - 사용자 등록 */
 
-    	INSERT INTO tb_user ( id
+    	INSERT INTO tb_user ( parentSiteTy
+    	                    , id
     	                    , name
-    	                    , parentSiteTy
+    	                    , email
+    	                    , image_url
+    	                    , reg_user_id
+    	                    , upd_user_id
     	                    )
-		VALUES ( #{id}
+		VALUES ( #{parentSiteTy}  /* 부모 사이트 종류 - G3 */
+		       , #{id}            
 		       , #{name}          /* 이름 */
-		       , #{parentSiteTy}  /* 부모 사이트 종류 - G3 */
+		       , #{email}         /* 이메일 */
+		       , #{imageUrl}      /* 이미지URL */
+		       , 0                /* 등록자ID */
+		       , 0                /* 수정자ID */
 		       )
     </insert>
 

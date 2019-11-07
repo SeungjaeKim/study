@@ -83,8 +83,10 @@ public class AuthProvider implements AuthenticationProvider {
 			//신규가입
 			if (loginUserVo == null) {
 				//신규 사용자 등록
+				loginUserVo.setParentSiteTy(CommCode.ParentSiteTy.GOOGLE.getCd());  //부모 사이트 종류 - 구글
+				loginUserVo.setId(userId);
+				loginUserVo.setEmail(email);
 				loginUserVo.setName(name);
-		        loginUserVo.setParentSiteTy(CommCode.ParentSiteTy.GOOGLE.getCd());  //구글
 				userAdmService.insertUser(loginUserVo);
 			}
 			//ID 일치

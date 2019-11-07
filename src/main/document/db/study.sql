@@ -70,53 +70,56 @@ CREATE TABLE IF NOT EXISTS 'study'.'tbl_news' (
 ENGINE = InnoDB
 ;
 
-CREATE TABLE IF NOT EXISTS `study`.`tb_user` (
-  `user_seq` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '사용자 일련번호',
-  `parent_site_type` VARCHAR(10) NOT NULL COMMENT '부모 사이트 종류',
-  `id` VARCHAR(20) NOT NULL COMMENT 'ID',
-  `name` VARCHAR(20) NOT NULL COMMENT '이름',
-  `email` VARCHAR(50) NOT NULL COMMENT '이메일',
-  `image_url` VARCHAR(250) NULL COMMENT '이미지 URL',
-  `use_yn` VARCHAR(45) NOT NULL DEFAULT 'Y' COMMENT '사용여부YN',
-  `login_fail_cnt` INT NOT NULL DEFAULT 0 COMMENT '로그인 실패 횟수',
-  `reg_dt` DATE NOT NULL DEFAULT now() COMMENT '등록일시',
-  `reg_user_id` VARCHAR(45) NULL COMMENT '등록자 ID',
-  `upd_dt` DATE NOT NULL DEFAULT now() COMMENT '수정일시',
-  `upd_user_id` VARCHAR(45) NULL COMMENT '수정자 ID',
-  PRIMARY KEY (`user_seq`),
-  INDEX `tb_user` (`parent_site_type` ASC, `id` ASC),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
+-- 사용자
+CREATE TABLE IF NOT EXISTS 'study'.'tb_user' (
+  'user_seq' BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '사용자 일련번호',
+  'parent_site_type' VARCHAR(10) NOT NULL COMMENT '부모 사이트 종류',
+  'id' VARCHAR(20) NOT NULL COMMENT 'ID',
+  'name' VARCHAR(20) NOT NULL COMMENT '이름',
+  'email' VARCHAR(50) NOT NULL COMMENT '이메일',
+  'image_url' VARCHAR(250) NULL COMMENT '이미지 URL',
+  'use_yn' VARCHAR(45) NOT NULL DEFAULT 'Y' COMMENT '사용여부YN',
+  'login_fail_cnt' INT NOT NULL DEFAULT 0 COMMENT '로그인 실패 횟수',
+  'reg_dt' DATE NOT NULL DEFAULT now() COMMENT '등록일시',
+  'reg_user_seq' BIGINT(20) NULL COMMENT '등록자 일련번호',
+  'upd_dt' DATE NOT NULL DEFAULT now() COMMENT '수정일시',
+  'upd_user_seq' BIGINT(20) NULL COMMENT '수정자 일련번호',
+  PRIMARY KEY ('user_seq'),
+  INDEX 'tb_user' ('parent_site_type' ASC, 'id' ASC),
+  UNIQUE INDEX 'email_UNIQUE' ('email' ASC) )
 ENGINE = InnoDB
 ;
 
-CREATE TABLE IF NOT EXISTS `study`.`tb_login_hist` (
-  `login_hist_seq` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '로그인 이력 일련번호',
-  `user_seq` BIGINT(20) NOT NULL COMMENT '사용자 일련번호',
-  `ip` VARCHAR(45) NULL COMMENT 'ip',
-  `login_succ_yn` VARCHAR(1) NOT NULL DEFAULT 'N' COMMENT '로그인 성공 여부',
-  `login_dt` DATE NOT NULL DEFAULT now() COMMENT '로그인 일시',
-  INDEX `fk_login_hist_tb_user1_idx` (`user_seq` ASC),
-  PRIMARY KEY (`login_hist_seq`),
-  CONSTRAINT `fk_login_hist_tb_user1`
-    FOREIGN KEY (`user_seq`)
-    REFERENCES `study`.`tb_user` (`user_seq`)
+-- 로그인 이력
+CREATE TABLE IF NOT EXISTS 'study'.'tb_login_hist' (
+  'login_hist_seq' BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '로그인 이력 일련번호',
+  'user_seq' BIGINT(20) NOT NULL COMMENT '사용자 일련번호',
+  'ip' VARCHAR(45) NULL COMMENT 'ip',
+  'login_succ_yn' VARCHAR(1) NOT NULL DEFAULT 'N' COMMENT '로그인 성공 여부',
+  'login_dt' DATE NOT NULL DEFAULT now() COMMENT '로그인 일시',
+  INDEX 'fk_login_hist_tb_user1_idx' ('user_seq' ASC),
+  PRIMARY KEY ('login_hist_seq'),
+  CONSTRAINT 'fk_login_hist_tb_user1'
+    FOREIGN KEY ('user_seq')
+    REFERENCES 'study'.'tb_user' ('user_seq')
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 ;
 
-CREATE TABLE IF NOT EXISTS `study`.`tb_lotto` (
-  `turn_no` INT NOT NULL,
-  `turn_day` VARCHAR(8) NOT NULL,
-  `no1` INT NOT NULL,
-  `no2` INT NOT NULL,
-  `no3` INT NOT NULL,
-  `no4` INT NOT NULL,
-  `no5` INT NOT NULL,
-  `no6` INT NOT NULL,
-  `no7` INT NOT NULL,
-  PRIMARY KEY (`turn_no`),
-  UNIQUE INDEX `turn_no_UNIQUE` (`turn_no` ASC))
+-- 로또
+CREATE TABLE IF NOT EXISTS 'study'.'tb_lotto' (
+  'turn_no' INT NOT NULL,
+  'turn_day' VARCHAR(8) NOT NULL,
+  'no1' INT NOT NULL,
+  'no2' INT NOT NULL,
+  'no3' INT NOT NULL,
+  'no4' INT NOT NULL,
+  'no5' INT NOT NULL,
+  'no6' INT NOT NULL,
+  'no7' INT NOT NULL,
+  PRIMARY KEY ('turn_no'),
+  UNIQUE INDEX 'turn_no_UNIQUE' ('turn_no' ASC))
 ENGINE = InnoDB
 
 
