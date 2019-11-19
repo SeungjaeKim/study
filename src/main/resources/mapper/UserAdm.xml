@@ -16,7 +16,7 @@
     	                    , upd_user_id
     	                    )
 		VALUES ( #{parentSiteTy}  /* 부모 사이트 종류 - G3 */
-		       , #{id}            
+		       , #{id}
 		       , #{name}          /* 이름 */
 		       , #{email}         /* 이메일 */
 		       , #{imageUrl}      /* 이미지URL */
@@ -38,10 +38,14 @@
     <select id="selectUser" parameterType="com.study.admin.user.domain.UserVo" resultType="com.study.admin.user.domain.UserVo">
         /* selectUser - 사용자 조회 */
 
-        SELECT id
-             , name            /* 이름 */
+        SELECT userSeq         /* 사용자 일련번호 */
              , parent_site_ty  /* 부모 사이트 종류 - G3 */
+             , id
+             , email           /* 이메일 */
+             , name            /* 이름 */
+             , image_url       /* 프로필 이미지 URL */
              , user_yn         /* 사용여부 YN */
+             , login_fail_cnt  /* 로그인 실패 횟수 */
           FROM tb_user         /* 사용자 T */
 		<where>
 			<if test="id != null and !id.equals('')">

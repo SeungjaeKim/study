@@ -85,15 +85,21 @@ public class AuthProvider implements AuthenticationProvider {
 				//신규 사용자 등록
 				loginUserVo.setParentSiteTy(CommCode.ParentSiteTy.GOOGLE.getCd());  //부모 사이트 종류 - 구글
 				loginUserVo.setId(userId);
-				loginUserVo.setEmail(email);
 				loginUserVo.setName(name);
+				loginUserVo.setEmail(email);
+				loginUserVo.setImageUrl((String) payload.get("picture"));
 				userAdmService.insertUser(loginUserVo);
+
+				//로그인 이력 추가
+			}
+			else if (loginUserVo.getLoginFailCnt()>5 || CommCode.YN.N.getCd().equals(loginUserVo.getUseYn())) {
+				throw new UsernameNotFoundException("User Not Found");
 			}
 			//ID 일치
 			else if (userId.equals(loginUserVo.getId())) {
 
 				//로그인 일시 정보 갱신
-
+				//사용자 정보 변경사항 갱신
 			}
 			//ID 불일치
 			else {
@@ -103,6 +109,10 @@ public class AuthProvider implements AuthenticationProvider {
 	        //사용자 권한 정보 설정
 	        List<GrantedAuthority> roleList = new ArrayList<GrantedAuthority>();
 	        roleList.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+	        if (true) {
+	        	roleList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+	        }
 
 	        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginEmail, loginEmail, roleList);
 	        authenticationToken.setDetails(loginUserVo);
